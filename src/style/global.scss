@@ -1,0 +1,42 @@
+@import "color";
+@import "font";
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Helvetica", -apple-system, sans-serif;
+  background-color: $background;
+  color: $black;
+}
+
+ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1330px;
+  margin: 0 auto;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1 0 auto;
+  margin-left: 230px;
+  padding: 0 10px;
+  margin-bottom: 60px;
+}
+
+
+@import "media";

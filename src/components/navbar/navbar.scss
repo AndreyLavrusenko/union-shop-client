@@ -1,0 +1,238 @@
+@import "./src/style/color";
+
+@import "./src/style/color";
+
+
+
+.side {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-right: 20px;
+  transition: width .25s linear;
+
+  path {
+    stroke: #000;
+  }
+
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #fff;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    min-height: 600px;
+    padding: 30px 15px;
+  }
+
+  &__header {
+    position: relative;
+    margin-bottom: 40px;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+    transition: all .11s linear;
+  }
+
+  &__logo-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid white;
+    flex-shrink: 0;
+  }
+
+  &__logo-text {
+    font-size: 22px;
+    font-weight: 500;
+    margin-left: 12px;
+  }
+
+  &__footer {
+    text-align: center;
+    padding: 10px 0;
+    margin: auto 0 100px;
+  }
+}
+
+.side-toggle {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  vertical-align: middle;
+  background-color: transparent;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(-100%, -50%);
+  border-radius: 12px;
+  transition: all .1s linear;
+
+  &:hover {
+    background-color: white;
+  }
+
+  svg {
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+
+.nav {
+  margin-top: 60px;
+
+  &__list-item {
+    list-style: none;
+    width: 100%;
+    margin-bottom: 6px;
+  }
+
+  &__list-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    padding: 18px;
+    border-radius: 24px;
+    position: relative;
+    transition: all .25s linear;
+
+    path {
+      transition: all .35s linear;
+    }
+
+    &:hover {
+      color: #fff;
+
+      path {
+        stroke: #fff;
+      }
+
+      &::before {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+    }
+    &.active {
+      color: #fff;
+
+      path {
+        stroke: #fff;
+      }
+
+      &::before {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      &::after {
+        opacity: 1;
+        transform: translate(-20px, -50%);
+      }
+    }
+
+    &.active {
+      &::before {
+        width: calc(100% + 35px);
+      }
+
+      &::after {
+        transform: translate(24px, -50%);
+      }
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background-color: $dark;
+      position: absolute;
+      opacity: 0;
+      transform: translateX(-20px);
+      transform-origin: left;
+      transition: all .15s linear;
+      border-radius: 12px;
+    }
+
+    &::after {
+      content: "";
+      width: 18px;
+      height: 18px;
+      background-image: url('../../assets/image/icon/arrow.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      opacity: 0;
+      transform: translate(-40px, -50%);
+      transition: all .16s ease-in;
+    }
+
+  }
+
+  &__list-link-icon {
+    width: 24px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__list-link-text {
+    font-size: 16px;
+    margin-left: 18px;
+    position: relative;
+    transition: all .2s linear;
+    z-index: 2;
+  }
+}
+
+.logout-link {
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  overflow: hidden;
+  border-radius: 12px;
+  padding: 18px;
+  transition: background-color .1s linear;
+
+  &:hover, &:active {
+    background-color: var(--light);
+  }
+
+  &__icon {
+    width: 18px;
+    flex-shrink: 0;
+  }
+
+  &__text {
+    color: inherit;
+    margin-left: 12px;
+    font-size: 14px;
+  }
+}

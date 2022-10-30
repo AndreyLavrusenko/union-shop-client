@@ -1,0 +1,76 @@
+@font-face {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 400;
+
+  src: local("Helvetica"),
+  url("../assets/fonts/Helvetica/Helvetica.woff2") format("woff2"),
+  url("../assets/fonts/Helvetica/Helvetica.woff") format("woff");
+}
+
+
+@font-face {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 300;
+
+  src: local("Helvetica"),
+  url("../assets/fonts/Helvetica/Helvetica-Light.woff2") format("woff2"),
+  url("../assets/fonts/Helvetica/Helvetica-Light.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 600;
+
+  src: local("Helvetica"),
+  url("../assets/fonts/Helvetica/Helvetica-Bold.woff2") format("woff2"),
+  url("../assets/fonts/Helvetica/Helvetica-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 200;
+
+  src: local("Raleway"),
+  url("../assets/fonts/Raleway/Raleway-Light.ttf") format("ttf")
+}
+
+@font-face {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 300;
+
+  src: local("Raleway"),
+  url("../assets/fonts/Raleway/Raleway-Regular.ttf") format("ttf")
+}
+
+@font-face {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+
+  src: local("Raleway"),
+  url("../assets/fonts/Raleway/Raleway-Medium.ttf") format("ttf")
+}
+
+@font-face {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 600;
+
+  src: local("Raleway"),
+  url("../assets/fonts/Raleway/Raleway-SemiBold.ttf") format("ttf")
+}
+
+
+@font-face {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+
+  src: local("Raleway"),
+  url("../assets/fonts/Raleway/Raleway-Bold.ttf") format("ttf")
+}

@@ -1,0 +1,93 @@
+@import "./src/style/color";
+
+.modal {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(15, 15, 15, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .5s;
+  opacity: 0;
+  visibility: hidden;
+
+  &__content {
+    padding: 20px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 14px;
+    width: 474px;
+    height: 623px;
+  }
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__header {
+    margin-top: -20px;
+    text-align: center;
+    position: relative;
+
+    &-logo {
+      width: 150px;
+    }
+  }
+
+  &__info {
+    margin-top: 40px;
+    padding: 0 35px;
+
+    form {
+      margin-top: 40px;
+    }
+
+    &-title {
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 28px;
+      font-family: "Raleway",  -apple-system, sans-serif;
+    }
+
+    &-desc {
+      font-size: 15px;
+      line-height: 18px;
+      color: rgba(0, 0, 0, 0.46);
+      font-family: "Raleway",  -apple-system, sans-serif;
+      margin-top: -10px;
+    }
+
+    &-input {
+      border: 1.5px solid rgba(0, 0, 0, 0.35);
+      border-radius: 5px;
+      background-color: inherit;
+      padding: 15px 10px;
+      width: calc(100% - 25px);
+      display: block;
+      margin-bottom: 25px;
+    }
+
+    &-button {
+      background: $blue;
+      border-radius: 10px;
+      width: 100%;
+      display: block;
+      color: white;
+      border: $blue;
+      cursor: pointer;
+      padding: 14px 0;
+
+      &:focus {
+        box-shadow: 0 0 10px $blue;
+        outline: none;
+      }
+    }
+  }
+
+
+}
