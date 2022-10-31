@@ -1,4 +1,5 @@
 @import "./src/style/color";
+@import "./src/style/font";
 
 .modal {
   height: 100vh;
@@ -21,7 +22,7 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 14px;
     width: 474px;
-    height: 623px;
+    height: 573px;
   }
 
   &.active {
@@ -37,6 +38,40 @@
     &-logo {
       width: 150px;
     }
+
+    &-close {
+      position: absolute;
+      top: 18px;
+      right: 5px;
+      width: 24px;
+      height: 24px;
+      opacity: 0.2;
+      cursor: pointer;
+      transition: opacity ease 0.5s;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 10px;
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: #000;
+      }
+
+      &::before {
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        transform: rotate(-45deg);
+      }
+    }
   }
 
   &__info {
@@ -47,29 +82,71 @@
       margin-top: 40px;
     }
 
+    &-error {
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      color: $red;
+      position: relative;
+      top: -15px;
+      font-size: 12px;
+    }
+
+    &-back {
+      color: $blue;
+      text-align: center;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: .2s;
+
+      &:hover {
+        color: #1d1dd2
+      }
+    }
+
+    &-link {
+      color: $dark;
+      text-decoration: none;
+      position: relative;
+      top: -15px;
+      display: block;
+      padding-bottom: 20px;
+    }
+
     &-title {
       font-weight: 600;
       font-size: 24px;
       line-height: 28px;
-      font-family: "Raleway",  -apple-system, sans-serif;
+      font-family: "Raleway", -apple-system, sans-serif;
     }
 
     &-desc {
       font-size: 15px;
       line-height: 18px;
       color: rgba(0, 0, 0, 0.46);
-      font-family: "Raleway",  -apple-system, sans-serif;
+      font-family: "Raleway", -apple-system, sans-serif;
       margin-top: -10px;
     }
 
     &-input {
-      border: 1.5px solid rgba(0, 0, 0, 0.35);
+      border: 2px solid rgba(0, 0, 0, 0.35);
       border-radius: 5px;
       background-color: inherit;
       padding: 15px 10px;
       width: calc(100% - 25px);
       display: block;
       margin-bottom: 25px;
+
+      &:hover {
+        border: 2px solid #0707e1;
+        transition: .4s;
+      }
+
+      &:focus {
+        outline: none;
+        border: 2px solid #0707e1;
+      }
     }
 
     &-button {
@@ -81,12 +158,77 @@
       border: $blue;
       cursor: pointer;
       padding: 14px 0;
+      transition: .4s;
+
+      &:hover {
+        background-color: #1d1dd2
+      }
 
       &:focus {
         box-shadow: 0 0 10px $blue;
         outline: none;
       }
     }
+
+    a {
+      text-decoration: none;
+      outline: none;
+      width: 140px;
+    }
+
+    &__button-link {
+      background-color: inherit;
+      border: 2px solid $blue;
+      color: $blue;
+      margin-top: 10px;
+
+      &:hover {
+        box-shadow: 0 0 5px $blue;
+        background-color: inherit;
+      }
+
+      &:focus {
+        box-shadow: 0 0 10px $blue;
+        outline: none;
+      }
+    }
+
+    &-or {
+      display: block;
+      position: relative;
+      text-align: center;
+      font-size: 17px;
+      line-height: 20px;
+      color: rgba(0, 0, 0, 0.41);
+      margin-top: 15px;
+
+      &::after, &::before {
+        content: '';
+        display: block;
+        width: 40px;
+        height: 1px;
+        background-color: rgba(0, 0, 0, 0.41);
+        position: absolute;
+      }
+
+      &::after {
+        top: 50%;
+        right: 130px;
+      }
+
+      &::before {
+        margin-left: 50px;
+        top: 50%;
+        left: 80px;
+      }
+    }
+  }
+
+  &__login {
+    cursor: pointer;
+    margin-top: 31px;
+    display: flex;
+    justify-content: space-between;
   }
 
 

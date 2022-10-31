@@ -3,12 +3,19 @@ import './navbar.scss'
 import nav_logo from '../../assets/image/logo/nav_logo.svg'
 import Modal from "../modal/Modal";
 import NavItems from "./navItems/NavItems";
+import {useDispatch} from "react-redux";
+import {authAPI} from "../../api/api";
 
 const Navbar = ({isAuth}) => {
-    const [modal, setModal] = useState(true)
+    const [modal, setModal] = useState(false)
+    const dispatch = useDispatch()
+
+    const handleLogout = async () => {
+        await authAPI.logout(dispatch)
+    }
 
     return (
-        <sidebar className="side js-side">
+        <div className="side js-side">
             <div className="side__inner">
                 <img src={nav_logo} alt="logo"/>
                 <nav className="nav">
@@ -62,8 +69,8 @@ const Navbar = ({isAuth}) => {
                 <div className="side__footer">
                     {isAuth
 
-                        ? <button className="logout-link" title="Logout">
-                            <img src="../../assets/image/icon/face-id-seeklogo.com.svg" alt=""/>
+                        ? <button className="logout-link" onClick={() => handleLogout()} title="Logout">
+
                             <svg className="logout-link__icon" xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                  viewBox="0 0 24 24">
                                 <path fill="#19262E"
@@ -132,7 +139,7 @@ const Navbar = ({isAuth}) => {
                 </div>
             </div>
             <Modal active={modal} setModalActive={setModal}/>
-        </sidebar>
+        </div>
     );
 }
 
