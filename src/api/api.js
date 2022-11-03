@@ -1,12 +1,22 @@
 import {
-    loginFailure,
+    loginUnionFailure,
+    loginOrRegFailure,
     loginFailureServices,
     loginStart,
     loginSuccess,
     logoutFailure,
     logoutStart,
     logoutSuccess
-} from "../redux/userSlice";
+} from "../redux/slices/userSlice";
+import {
+    productFailure,
+    productLoading,
+    topProductSuccess,
+    firstCategoryProductSuccess,
+    secondCategoryProductSuccess,
+    thirdCategoryProductSuccess,
+} from "../redux/slices/productSlice";
+
 import axios from "axios";
 
 const instance = axios.create({
@@ -16,6 +26,7 @@ const instance = axios.create({
 
 
 export const authAPI = {
+    // Вход через сторонние сервисы
     loginByThirdPartyService: async (dispatch) => {
         dispatch(loginStart())
         try {
@@ -26,13 +37,31 @@ export const authAPI = {
         }
     },
 
+    // Вход через union id
     loginByUnionId: async (dispatch, user) => {
         dispatch(loginStart())
         try {
             const res = await instance.post('auth/union/signin', user)
             dispatch(loginSuccess(res.data.token))
+            return res.data
         } catch (err) {
-            dispatch(loginFailure())
+            dispatch(loginUnionFailure())
+        }
+    },
+
+    // Вход обычным способом
+    loginOrRegister: async (dispatch, user) => {
+        dispatch(loginStart())
+        try {
+            const res = await instance.post('auth/signup', user)
+            if (res.data.resultCode === 1) {
+                dispatch(loginOrRegFailure())
+            } else {
+                dispatch(loginSuccess(res.data.token))
+                return res.data
+            }
+        } catch (err) {
+            dispatch(loginOrRegFailure())
         }
     },
 
@@ -45,5 +74,48 @@ export const authAPI = {
         } catch (err) {
             dispatch(logoutFailure())
         }
+    }
+}
+
+
+export const productAPI = {
+    renderTop: async (dispatch) => {
+        dispatch(productLoading())
+        try {
+            const {data} = await instance.get('product/top')
+            dispatch(topProductSuccess(data))
+            return data;
+        } catch (err) {
+            dispatch(productFailure())
+        }
+    },
+    renderCategory: async (dispatch) => {
+        dispatch(productLoading())
+        try {
+            const res = await instance.get('product/popular/1')
+            dispatch(firstCategoryProductSuccess(res.data))
+
+            const res2 = await instance.get('product/popular/2')
+            dispatch(secondCategoryProductSuccess(res2.data))
+
+            const res3 = await instance.get('product/popular/3')
+            dispatch(thirdCategoryProductSuccess(res3.data))
+
+        } catch (err) {
+            dispatch(productFailure())
+        }
+    },
+
+    getAdvertising: async () => {
+        const {data} = await instance.get("product/advertising")
+        return data
+    }
+}
+
+
+export const systemAPI = {
+    getCopyright: async () => {
+        const {data} = await instance.get('system/copyright')
+        return data
     }
 }

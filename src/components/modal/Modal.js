@@ -1,3 +1,5 @@
+import React from "react";
+import ReactDOM from "react-dom";
 import './modal.scss'
 import logo from '../../assets/image/logo/header_logo.svg'
 import {useState} from "react";
@@ -7,8 +9,7 @@ import ClassicModal from "./modalWindow/ClassicModal";
 const Modal = ({active, setModalActive}) => {
     const [unionId, setUnionId] = useState(false)
 
-
-    return (
+    return ReactDOM.createPortal(
         <div
             className={active ? "modal active" : "modal"}
             onClick={() => setModalActive(false)}
@@ -26,7 +27,8 @@ const Modal = ({active, setModalActive}) => {
                     : <ClassicModal setModalActive={setModalActive} setUnionId={setUnionId}/>
                 }
             </div>
-        </div>
+        </div>,
+        document.getElementById('portal')
     )
 }
 

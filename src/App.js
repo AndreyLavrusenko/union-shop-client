@@ -5,23 +5,31 @@ import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import {Routes, Route} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {authAPI} from "./api/api";
+import {authAPI, systemAPI} from "./api/api";
 import {useDispatch, useSelector} from "react-redux";
+import Home from "./pages/home/Home";
 
 function App() {
     // Получаем из стора текущего пользователя
     const user = useSelector(state => state.user.currentUser);
     const dispatch = useDispatch();
 
+    const [copyright, setCopyright] = useState(null)
+
     // Если пользователя нет, то делаем запрос на сервер и получаем его токен
     useEffect(() => {
         const getUserLogin = async () => {
             if (!user) {
-                console.log('loginByThirdPartyService')
                 await authAPI.loginByThirdPartyService(dispatch)
             }
         }
         getUserLogin()
+
+        const getCopyright = async () => {
+            const data = await systemAPI.getCopyright()
+            setCopyright(data.copyright)
+        }
+        getCopyright()
     }, [user]);
 
 
@@ -32,11 +40,11 @@ function App() {
                 <div className="main">
                     <Navbar isAuth={user}/>
                     <Routes>
-
+                        <Route path="/" element={<Home/>}/>
                     </Routes>
                 </div>
             </div>
-            {/*<Footer/>*/}
+            <Footer copyright={copyright}/>
         </div>
 
     );

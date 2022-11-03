@@ -1,10 +1,12 @@
 import {authAPI} from "../../../api/api";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
+import {useNavigate} from 'react-router-dom'
 
 const UnionModal = ({setUnionId, setModalActive}) => {
     const dispatch = useDispatch()
-    const {isLoading, error} = useSelector(state => state.user)
+    const navigate = useNavigate();
+    const {isLoading, unionError} = useSelector(state => state.user)
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -12,10 +14,15 @@ const UnionModal = ({setUnionId, setModalActive}) => {
 
     const singUpByUnion = async (e) => {
         e.preventDefault();
-        await authAPI.loginByUnionId(dispatch, {email, password})
-        if (error === false) {
-            setModalActive(false)
-        }
+
+        try {
+            const res = await authAPI.loginByUnionId(dispatch, {email, password})
+            if (res.resultCode === 0) {
+                setModalActive(false)
+                // window.location.replace(window.location.href)
+            }
+        } catch (err) {}
+
     }
 
     return (
@@ -34,12 +41,12 @@ const UnionModal = ({setUnionId, setModalActive}) => {
                     type="password"
                     className="modal__info-input"
                     name="password"
-                   placeholder="Введите пароль"
+                    placeholder="Введите пароль"
                     onChange={e => setPassword(e.target.value)}
                 />
                 <a href="https://unionuniverse.one/content/login/login-start.php" className="modal__info-link">Не помню
                     пароль</a>
-                <p className="modal__info-error">{error && "Неверный логин или пароль"}</p>
+                <p className="modal__info-error">{unionError && "Неверный логин или пароль"}</p>
                 <button
                     className="modal__info-button"
                     type="submit"

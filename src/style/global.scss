@@ -21,19 +21,17 @@ ul, li {
 }
 
 .container {
-  max-width: 1330px;
+  //max-width: 1330px;
   margin: 0 auto;
 }
 
 .wrapper {
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
 }
 
 .main {
   flex: 1 0 auto;
-  margin-left: 230px;
+  margin-left: 240px;
   padding: 0 10px;
   margin-bottom: 60px;
 }
