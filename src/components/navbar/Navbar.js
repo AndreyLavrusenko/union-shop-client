@@ -28,7 +28,7 @@ const Navbar = ({isAuth}) => {
                                     stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                         </NavItems>
-                        <NavItems pathway={"/all"} name={"Все товары"}>
+                        <NavItems pathway={"/shop"} name={"Все товары"}>
                             <svg className="nav__list-link-icon" width="26" height="22" viewBox="0 0 26 22"
                                  fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path

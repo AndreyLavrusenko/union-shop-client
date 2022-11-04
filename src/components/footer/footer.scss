@@ -3,8 +3,9 @@
   height: 225px;
   max-width: 100% !important;
   width: 100vw;
-  margin-top: auto;
-  z-index: 2;
+  z-index: 1;
+  position:absolute;
+  bottom: -350px;
 
   &__wrapper {
     margin-left: 220px;

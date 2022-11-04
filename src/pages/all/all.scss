@@ -1,0 +1,147 @@
+@import "src/style/color";
+
+.search {
+  display: flex;
+  justify-content: center;
+  margin-left: -230px;
+}
+
+.search > h3 {
+  font-weight: normal;
+}
+
+.search > h1,
+.search > h3 {
+  color: black;
+  margin-bottom: 15px;
+}
+
+.search > div {
+  display: inline-block;
+  position: relative;
+}
+
+.search > div:after {
+  content: "";
+  background: black;
+  width: 2px;
+  height: 16px;
+  position: absolute;
+  top: 26px;
+  right: 0;
+  transform: rotate(135deg);
+}
+
+.search > div > input {
+  cursor: pointer;
+  color: black;
+  font-size: 14px;
+  background: transparent;
+  width: 10px;
+  height: 10px;
+  padding: 10px;
+  border: solid 2px black;
+  outline: none;
+  border-radius: 35px;
+  transition: width 0.5s;
+}
+
+.search > div > input::placeholder {
+  color: black;
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+}
+
+.search > div > input:focus::placeholder {
+  opacity: 1;
+}
+
+.search > div > input:focus,
+.search > div > input:not(:placeholder-shown) {
+  width: 250px;
+}
+
+
+.all {
+  width: 100%;
+
+  .stripe__card {
+    margin-bottom: 20px;
+  }
+
+  &__card {
+    display: flex;
+    flex-wrap: wrap;
+
+    svg {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 21px;
+      height: 24px;
+    }
+  }
+
+  &__category {
+    display: flex;
+    overflow-x: scroll;
+    padding-bottom: 20px;
+    margin-top: 40px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &-item {
+      white-space: nowrap;
+      margin-right: 15px;
+      cursor: pointer;
+      font-family: 'Raleway', -apple-system, sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 18px;
+      color: #262529;
+      opacity: 0.85;
+      text-decoration: none;
+    }
+
+    .active {
+      color: $red
+    }
+  }
+}
+
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pagination a {
+  padding: 10px 15px;
+  font-weight: 300;
+  border-radius: 5px;
+  margin-right: 5px;
+  border: 1px solid $blue;
+  color: $blue;
+}
+
+.pagination__link {
+  font-weight: bold;
+}
+
+.pagination__link--active a {
+  color: #fff;
+  background: $blue;
+}
+
+.pagination__link--disabled a {
+  color: rgb(198, 197, 202);
+  border: 1px solid rgb(198, 197, 202);
+}

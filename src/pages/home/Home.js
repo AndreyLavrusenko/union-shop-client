@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Card from "../../components/card/Card";
 import {useDispatch, useSelector} from "react-redux";
 import Preloader from "../../common/Preloader";
@@ -11,9 +11,12 @@ const Home = () => {
     const {topProducts, categoryProducts, isLoading} = useSelector(state => state.product);
     const dispatch = useDispatch();
 
+    const [loading, setLoading] = useState(true)
+
     const getAllProduct = useCallback(() => {
         productAPI.renderTop(dispatch)
         productAPI.renderCategory(dispatch)
+        setLoading(false)
     }, []);
 
     // Получение популярных товаров
@@ -27,7 +30,7 @@ const Home = () => {
     return (
         <>
             {
-                isLoading
+                loading
                     ? <Preloader />
                     : <>
                         <Card products={topProducts} title={"Лучшие товары."} secondTitle={"Зацените."} />

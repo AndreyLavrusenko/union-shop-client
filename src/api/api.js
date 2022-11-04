@@ -18,6 +18,7 @@ import {
 } from "../redux/slices/productSlice";
 
 import axios from "axios";
+import category from "../pages/all/category/Category";
 
 const instance = axios.create({
     withCredentials: true,
@@ -89,6 +90,8 @@ export const productAPI = {
             dispatch(productFailure())
         }
     },
+
+    // Рендер 3 полосок после популярной
     renderCategory: async (dispatch) => {
         dispatch(productLoading())
         try {
@@ -106,10 +109,27 @@ export const productAPI = {
         }
     },
 
+    // Реклама на главной странице
     getAdvertising: async () => {
         const {data} = await instance.get("product/advertising")
         return data
+    },
+
+    getAllCategoryType: async () => {
+        const {data} = await instance.get('product/category')
+        return data
+    },
+
+    getAllCategory: async (category, page ) => {
+        const {data} = await instance.get(category
+            ? `product/shop?category=${category}`
+            : `product/shop?page=${page}`
+        )
+
+        return data
     }
+
+
 }
 
 
