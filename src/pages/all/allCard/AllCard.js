@@ -12,6 +12,7 @@ const AllCard = ({products, search}) => {
                 {filteredProducts.map(item => {
                     return <CardItem
                         key={item.id}
+                        id={item.id}
                         title={item.title}
                         subtitle={item.description}
                         image={item.image}
@@ -29,6 +30,7 @@ const AllCard = ({products, search}) => {
                 {products.map(item => {
                     return <CardItem
                         key={item.id}
+                        id={item.id}
                         title={item.title}
                         subtitle={item.description}
                         image={item.image}

@@ -13,6 +13,7 @@ const Card = ({products, title, secondTitle}) => {
                 {products.map(item => {
                     return <CardItem
                         key={item.id}
+                        id={item.id}
                         title={item.title}
                         subtitle={item.description}
                         image={item.image}

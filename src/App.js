@@ -11,6 +11,7 @@ import Footer from "./components/footer/Footer";
 
 import './style/global.scss'
 import './style/normalize.scss'
+import Card from "./pages/card/Card";
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home/>}/>
                         <Route path="/shop" element={<All/>}/>
+                        <Route path="/product/:id" element={<Card/>}/>
                     </Routes>
                 </div>
             </div>

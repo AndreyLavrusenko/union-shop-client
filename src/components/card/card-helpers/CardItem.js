@@ -1,9 +1,9 @@
 import {NavLink} from "react-router-dom";
 
-const CardItem = ({backgroundcolor, color, image, subtitle, title, isLogo}) => {
+const CardItem = ({backgroundcolor, color, image, subtitle, title, isLogo, id}) => {
 
     return (
-        <NavLink to={"/"} className="stripe__card" style={{backgroundColor: backgroundcolor, color: color}}>
+        <NavLink to={`/product/${id}`} key={id} className="stripe__card" style={{backgroundColor: backgroundcolor, color: color}}>
             <div className="stripe__card__header">
                 <div className="stripe__header__title">{title}</div>
                 <div className="stripe__header__subtitle">{subtitle}</div>

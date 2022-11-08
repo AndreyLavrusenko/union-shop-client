@@ -8,51 +8,55 @@ import Advertising from "../../components/advertising/Advertising";
 
 const Home = () => {
     // Все товары
-    const {topProducts, categoryProducts, isLoading} = useSelector(state => state.product);
-    const dispatch = useDispatch();
-
     const [loading, setLoading] = useState(true)
+    const [topProduct, setTopProduct] = useState(null)
+    const [categoryProduct, setCategoryProduct] = useState(null)
 
-    const getAllProduct = useCallback(() => {
-        productAPI.renderTop(dispatch)
-        productAPI.renderCategory(dispatch)
+    const getAllProduct = async () => {
+        const topProduct = await productAPI.renderTop()
+        const categoryProduct = await productAPI.renderCategory()
+
+        setTopProduct(topProduct)
+        setCategoryProduct(categoryProduct)
+
         setLoading(false)
-    }, []);
+    };
 
     // Получение популярных товаров
     useEffect(() => {
         getAllProduct()
     }, [])
 
-    const {firstCategory, secondCategory, thirdCategory} = categoryProducts
 
+    if (loading) {
+        return <Preloader/>
+    }
+
+
+    const {firstCategory: {data: firstCategory}, secondCategory: {data: secondCategory}, thirdCategory: {data: thirdCategory}} = categoryProduct
 
     return (
         <>
-            {
-                loading
-                    ? <Preloader />
-                    : <>
-                        <Card products={topProducts} title={"Лучшие товары."} secondTitle={"Зацените."} />
-                        {firstCategory.resultProduct.length > 0
-                            ? <Card products={firstCategory.resultProduct} title={firstCategory.titles[0]} secondTitle={firstCategory.titles[1]} />
-                            : null
-                        }
-                        {secondCategory.resultProduct.length > 0
-                            ? <Card products={secondCategory.resultProduct} title={secondCategory.titles[0]} secondTitle={secondCategory.titles[1]} />
-                            : null
-                        }
-                        {thirdCategory.resultProduct.length > 0
-                            ? <Card products={thirdCategory.resultProduct} title={thirdCategory.titles[0]} secondTitle={thirdCategory.titles[1]} />
-                            : null
-                        }
-                        <Advertising />
-                    </>
-
-
+            <Card products={topProduct} title={"Лучшие товары."} secondTitle={"Зацените."}/>
+            {firstCategory.resultProduct.length > 0
+                ? <Card products={firstCategory.resultProduct} title={firstCategory.titles[0]}
+                        secondTitle={firstCategory.titles[1]}/>
+                : null
             }
+            {secondCategory.resultProduct.length > 0
+                ? <Card products={secondCategory.resultProduct} title={secondCategory.titles[0]}
+                        secondTitle={secondCategory.titles[1]}/>
+                : null
+            }
+            {thirdCategory.resultProduct.length > 0
+                ? <Card products={thirdCategory.resultProduct} title={thirdCategory.titles[0]}
+                        secondTitle={thirdCategory.titles[1]}/>
+                : null
+            }
+            <Advertising/>
         </>
     )
+
 }
 
 export default React.memo(Home)

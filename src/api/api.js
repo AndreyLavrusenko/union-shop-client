@@ -8,17 +8,9 @@ import {
     logoutStart,
     logoutSuccess
 } from "../redux/slices/userSlice";
-import {
-    productFailure,
-    productLoading,
-    topProductSuccess,
-    firstCategoryProductSuccess,
-    secondCategoryProductSuccess,
-    thirdCategoryProductSuccess,
-} from "../redux/slices/productSlice";
+
 
 import axios from "axios";
-import category from "../pages/all/category/Category";
 
 const instance = axios.create({
     withCredentials: true,
@@ -80,32 +72,32 @@ export const authAPI = {
 
 
 export const productAPI = {
-    renderTop: async (dispatch) => {
-        dispatch(productLoading())
+    renderTop: async () => {
         try {
             const {data} = await instance.get('product/top')
-            dispatch(topProductSuccess(data))
             return data;
         } catch (err) {
-            dispatch(productFailure())
+            console.log(err)
         }
     },
 
     // Рендер 3 полосок после популярной
-    renderCategory: async (dispatch) => {
-        dispatch(productLoading())
+    renderCategory: async () => {
         try {
-            const res = await instance.get('product/popular/1')
-            dispatch(firstCategoryProductSuccess(res.data))
+            const firstCategory = await instance.get('product/popular/1')
 
-            const res2 = await instance.get('product/popular/2')
-            dispatch(secondCategoryProductSuccess(res2.data))
+            const secondCategory = await instance.get('product/popular/2')
 
-            const res3 = await instance.get('product/popular/3')
-            dispatch(thirdCategoryProductSuccess(res3.data))
+            const thirdCategory = await instance.get('product/popular/3')
+
+            return {
+                firstCategory,
+                secondCategory,
+                thirdCategory
+            }
 
         } catch (err) {
-            dispatch(productFailure())
+            console.log(err)
         }
     },
 
@@ -127,6 +119,10 @@ export const productAPI = {
         )
 
         return data
+    },
+
+    getProductById: async (id) => {
+        return await instance.get(`/product/${id}`)
     }
 
 

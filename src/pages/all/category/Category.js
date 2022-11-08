@@ -38,10 +38,10 @@ const Category = ({setActiveCategory, activeCategory, setSearch}) => {
             <Link
                 to={"/shop"}
                 onClick={() => {
-                    setActiveCategoryFunc()
+                    setActiveCategoryFunc(null)
                     setSearch("")
                 }}
-                className="all__category-item">
+                className={activeCategory === null ? "all__category-item active" : "all__category-item"}>
                 Все
             </Link>
         </div>

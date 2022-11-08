@@ -1,0 +1,52 @@
+.cardslider {
+
+  &__main {
+    width: 390px;
+    height: 441px;
+    background: #FFFFFF;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+
+    &-img {
+      width: 80%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__down {
+    display: flex;
+    margin-top: 20px;
+
+    &-item {
+      background-color: #FFF;
+      width: 64px;
+      height: 55px;
+      cursor: pointer;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 0;
+    }
+
+    &-img {
+      object-fit: contain;
+      height: 100%;
+      width: 45px;
+    }
+  }
+
+  @keyframes brightness {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
