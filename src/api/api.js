@@ -11,6 +11,7 @@ import {
 
 
 import axios from "axios";
+import {addCart, cartError, cartStart, cartSuccess} from "../redux/slices/cartSlice";
 
 const instance = axios.create({
     withCredentials: true,
@@ -124,8 +125,20 @@ export const productAPI = {
     getProductById: async (id) => {
         return await instance.get(`/product/${id}`)
     }
+}
 
 
+export const cartAPI = {
+    setProduct: async (product, dispatch) => {
+        dispatch(cartStart())
+        try {
+            const res = await instance.post('/cart', product)
+            dispatch(cartSuccess(res.data))
+            dispatch(addCart())
+        } catch (err) {
+            dispatch(cartError())
+        }
+    }
 }
 
 

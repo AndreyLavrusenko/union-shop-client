@@ -67,6 +67,8 @@
 
   .stripe__card {
     margin-bottom: 20px;
+    margin-right: 50px;
+    margin-top: 25px;
   }
 
   &__card {
@@ -87,6 +89,7 @@
     overflow-x: scroll;
     padding-bottom: 20px;
     margin-top: 40px;
+    margin-left: 20px;
 
     &::-webkit-scrollbar {
       display: none;

@@ -4,21 +4,30 @@ import {createSlice} from "@reduxjs/toolkit";
 const cartSlice = createSlice({
     name: "cart",
     initialState: {
-        products: [],
+        isLoading: false,
+        error: false,
         quantity: 0,
-        totalPrice: 0,
     },
     reducers: {
-        addProduct: (state, action) => {
-            state.quantity += 1;
-            state.products.push(action.payload);
-            console.log(action.payload.quantity)
-            state.totalPrice += action.payload.price
+        cartStart: (state) => {
+            state.isLoading = true;
+            state.error = false;
+        },
+        cartSuccess: (state) => {
+            state.isLoading = false;
+            state.error = false;
+        },
+        cartError: (state) => {
+            state.isLoading = false;
+            state.error = true;
+        },
+        addCart: (state) => {
+            state.quantity += 1
         }
     }
 })
 
 
-export const {addProduct} = cartSlice.actions
+export const {cartStart, cartSuccess, cartError, addCart} = cartSlice.actions
 
 export default cartSlice.reducer
