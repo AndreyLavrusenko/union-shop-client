@@ -4,6 +4,8 @@ import CartItem from "../../components/cart/cart-item/CartItem";
 import {useEffect, useState} from "react";
 import {cartAPI} from "../../api/api";
 import Preloader from "../../common/Preloader";
+import CartLetter from "../../components/cart/cart-letter/CartLetter";
+import CartCheque from "../../components/cart/cart-cheque/CartCheque";
 
 const Cart = ({setRerenderCart, rerenderCart}) => {
     const [myCart, setMyCart] = useState([])
@@ -35,6 +37,8 @@ const Cart = ({setRerenderCart, rerenderCart}) => {
             {myCart.map((item, i) => (
                 <CartItem handleDelete={handleDelete} key={i} cart={item} />
             ))}
+            <CartLetter />
+            <CartCheque myCart={myCart}/>
         </div>
     )
 }
