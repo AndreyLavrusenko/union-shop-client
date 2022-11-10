@@ -5,7 +5,7 @@ const CardToggle = ({data, title}) => {
     // Открыты или закрыты блоки с информацией
     const [block, setBlock] = useState(false)
 
-    const string = data.split(';')
+    const string = data.split('. ')
 
     if (data.length > 1) {
         return (

@@ -1,4 +1,4 @@
-import CardItem from "../../../components/card/card-helpers/CardItem";
+import CardItem from "../../card/card-helpers/CardItem";
 
 const AllCard = ({products, search}) => {
     let filteredProducts = []

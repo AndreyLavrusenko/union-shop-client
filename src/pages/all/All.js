@@ -1,11 +1,11 @@
-import Search from "./search/Search";
+import Search from "../../components/all/search/Search";
 import './all.scss'
-import Category from "./category/Category";
+import Category from "../../components/all/category/Category";
 import {useEffect, useState} from "react";
 import {productAPI} from "../../api/api";
 import Preloader from "../../common/Preloader";
-import AllCard from "./allCard/AllCard";
-import Pagination from "./pagination/Pagination";
+import AllCard from "../../components/all/allCard/AllCard";
+import Pagination from "../../components/all/pagination/Pagination";
 
 
 const All = () => {

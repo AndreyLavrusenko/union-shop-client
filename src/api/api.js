@@ -11,7 +11,17 @@ import {
 
 
 import axios from "axios";
-import {addCart, cartError, cartStart, cartSuccess} from "../redux/slices/cartSlice";
+import {cartError, cartStart, cartSuccess} from "../redux/slices/cartSlice";
+
+
+let TOKEN = ""
+
+if (localStorage.getItem("persist:root")) {
+    if (JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser) {
+        TOKEN = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser;
+    }
+
+}
 
 const instance = axios.create({
     withCredentials: true,
@@ -113,7 +123,7 @@ export const productAPI = {
         return data
     },
 
-    getAllCategory: async (category, page ) => {
+    getAllCategory: async (category, page) => {
         const {data} = await instance.get(category
             ? `product/shop?category=${category}`
             : `product/shop?page=${page}`
@@ -132,12 +142,28 @@ export const cartAPI = {
     setProduct: async (product, dispatch) => {
         dispatch(cartStart())
         try {
-            const res = await instance.post('/cart', product)
+            const res = await instance.post('/cart', product, {
+                headers: {
+                    token: `Bearer ${TOKEN}`
+                }
+            })
             dispatch(cartSuccess(res.data))
-            dispatch(addCart())
         } catch (err) {
             dispatch(cartError())
         }
+    },
+
+    getCart: async () => {
+        const {data} = await instance.get('/cart/all', {
+            headers: {
+                token: `Bearer ${TOKEN}`
+            }
+        })
+        return data
+    },
+
+    deleteItemFromCart: async (id) => {
+        await instance.delete(`/cart/${id}`)
     }
 }
 

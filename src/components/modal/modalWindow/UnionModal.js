@@ -19,7 +19,7 @@ const UnionModal = ({setUnionId, setModalActive}) => {
             const res = await authAPI.loginByUnionId(dispatch, {email, password})
             if (res.resultCode === 0) {
                 setModalActive(false)
-                // window.location.replace(window.location.href)
+                window.location.reload()
             }
         } catch (err) {}
 

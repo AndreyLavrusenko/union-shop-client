@@ -97,6 +97,19 @@
 .nav {
   margin-top: 60px;
 
+  &__list-quantity {
+    border-radius: 50%;
+    background-color: $dark;
+    color: white;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    margin-left: 10px;
+  }
+
   &__list-item {
     list-style: none;
     width: 100%;

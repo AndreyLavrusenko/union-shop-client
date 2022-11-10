@@ -6,7 +6,7 @@ import Preloader from "../../common/Preloader";
 import CardInfo from "../../components/card-product/card-info/CardInfo";
 import './card.scss'
 
-const Card = () => {
+const Card = ({isAuth, setRerenderCart, rerenderCart}) => {
     // Получение id из адресной строки
     const {id} = useParams();
 
@@ -36,7 +36,13 @@ const Card = () => {
     return (
         <div className="card">
             <CardSlider image={productData.image} images={productData.image_arr} title={productData.title}/>
-            <CardInfo productInfo={productInfo} productData={productData} />
+            <CardInfo
+                setRerenderCart={setRerenderCart}
+                rerenderCart={rerenderCart}
+                isAuth={isAuth}
+                productInfo={productInfo}
+                productData={productData}
+            />
         </div>
 
     )

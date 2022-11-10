@@ -22,6 +22,13 @@
     line-height: 35px;
     font-weight: 500;
     font-family: "Raleway", -apple-system, sans-serif;
+
+    &-title {
+      font-size: 30px;
+      line-height: 35px;
+      font-weight: 500;
+      font-family: "Raleway", -apple-system, sans-serif;
+    }
   }
 
   &__price {
@@ -89,6 +96,15 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+
+    &-error {
+      color: $red;
+      position: relative;
+      top: -30px;
+      left: 100px;
+      font-size: 12px;
+
+    }
   }
 
   &__buy {
@@ -152,7 +168,6 @@
   }
 
   &__size {
-
 
     &-img {
       margin-top: 14px;

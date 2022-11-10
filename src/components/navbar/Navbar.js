@@ -6,7 +6,7 @@ import NavItems from "./navItems/NavItems";
 import {useDispatch} from "react-redux";
 import {authAPI} from "../../api/api";
 
-const Navbar = ({isAuth}) => {
+const Navbar = ({isAuth, rerenderCart}) => {
     const [modal, setModal] = useState(false)
     const dispatch = useDispatch()
 
@@ -37,7 +37,7 @@ const Navbar = ({isAuth}) => {
                             </svg>
                         </NavItems>
                         {isAuth ?
-                            <NavItems pathway={"/cart"} name={"Корзина"}>
+                            <NavItems rerenderCart={rerenderCart} pathway={"/cart"} name={"Корзина"}>
                                 <svg className="nav__list-link-icon" width="25" height="25" viewBox="0 0 25 25"
                                      fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path

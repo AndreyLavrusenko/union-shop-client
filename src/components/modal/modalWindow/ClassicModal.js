@@ -20,7 +20,7 @@ const ClassicModal = ({setModalActive, setUnionId}) => {
             const res = await authAPI.loginOrRegister(dispatch, {email, password})
             if (res.resultCode === 0) {
                 setModalActive(false)
-                // window.location.replace(window.location.href)
+                window.location.reload()
             }
         } catch (err) {}
     }

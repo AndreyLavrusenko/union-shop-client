@@ -8,10 +8,11 @@ import All from "./pages/all/All";
 import Header from "./components/header/Header";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
+import Card from "./pages/card/Card";
+import Cart from "./pages/cart/Cart";
 
 import './style/global.scss'
 import './style/normalize.scss'
-import Card from "./pages/card/Card";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
     const user = useSelector(state => state.user.currentUser);
     const dispatch = useDispatch();
     const [copyright, setCopyright] = useState(null)
+    const [rerenderCart, setRerenderCart] = useState(false)
 
 
     // Если пользователя нет, то делаем запрос на сервер и получаем его токен
@@ -44,11 +46,12 @@ function App() {
             <Header/>
             <div className='container'>
                 <div className="main">
-                    <Navbar isAuth={user}/>
+                    <Navbar rerenderCart={rerenderCart} isAuth={user}/>
                     <Routes>
                         <Route path="/" element={<Home/>}/>
                         <Route path="/shop" element={<All/>}/>
-                        <Route path="/product/:id" element={<Card/>}/>
+                        <Route path="/product/:id" element={<Card setRerenderCart={setRerenderCart} rerenderCart={rerenderCart} isAuth={user} />}/>
+                        <Route path="/cart" element={<Cart setRerenderCart={setRerenderCart} rerenderCart={rerenderCart} isAuth={user} />}/>
                     </Routes>
                 </div>
             </div>
