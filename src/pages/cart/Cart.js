@@ -6,6 +6,7 @@ import {cartAPI} from "../../api/api";
 import Preloader from "../../common/Preloader";
 import CartLetter from "../../components/cart/cart-letter/CartLetter";
 import CartCheque from "../../components/cart/cart-cheque/CartCheque";
+import './cart.scss'
 
 const Cart = ({setRerenderCart, rerenderCart}) => {
     const [myCart, setMyCart] = useState([])
@@ -34,11 +35,13 @@ const Cart = ({setRerenderCart, rerenderCart}) => {
     return (
         <div className="cart__main">
             <CartHeader myCart={myCart}/>
-            {myCart.map((item, i) => (
-                <CartItem handleDelete={handleDelete} key={i} cart={item} />
-            ))}
+            <div className="cart__item-wrapper">
+                {myCart.map((item, i) => (
+                    <CartItem handleDelete={handleDelete} key={i} cart={item} />
+                ))}
             <CartLetter />
             <CartCheque myCart={myCart}/>
+            </div>
         </div>
     )
 }

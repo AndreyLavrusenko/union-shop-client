@@ -71,3 +71,13 @@
     opacity: .6;
   }
 }
+
+@media (max-width: 1000px) {
+  .footer__wrapper {
+    margin-left: 0;
+  }
+
+  .footer__left {
+    padding-left: 20px;
+  }
+}

@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import Card from "../../components/card/Card";
-import {useDispatch, useSelector} from "react-redux";
 import Preloader from "../../common/Preloader";
-import {useCallback, useEffect} from "react";
+import {useEffect} from "react";
 import {productAPI} from "../../api/api";
 import Advertising from "../../components/advertising/Advertising";
+import './home.scss'
 
 const Home = () => {
     // Все товары

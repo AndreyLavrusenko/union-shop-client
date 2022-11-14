@@ -1,0 +1,20 @@
+@media (max-width: 1200px) {
+  .advertising__right {
+    width: 60%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .advertising__right {
+    width: 30%;
+    margin-left: -10px;
+  }
+
+  .advertising__wrapper {
+    justify-content: normal;
+  }
+
+  .advertising__left {
+    margin-left: 70px;
+  }
+}

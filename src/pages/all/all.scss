@@ -149,3 +149,42 @@
   color: rgb(198, 197, 202);
   border: 1px solid rgb(198, 197, 202);
 }
+
+
+@media (max-width: 1300px) {
+  .search {
+    margin-left: -50px;
+  }
+
+  .pagination {
+    margin-left: 50px;
+  }
+
+  .all .stripe__card {
+    margin-right: 1px;
+    min-width: 259px;
+    height: 321px;
+  }
+}
+
+@media (max-width: 1160px) {
+  .all .stripe__card {
+    margin-right: 30px;
+    min-width: 279px;
+    height: 361px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .search {
+    margin-left: 5px;
+  }
+}
+
+@media (max-width: 980px) {
+  .all .stripe__card {
+    margin-right: 1px;
+    min-width: 249px;
+    height: 321px;
+  }
+}

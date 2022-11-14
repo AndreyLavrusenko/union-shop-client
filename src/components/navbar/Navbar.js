@@ -6,7 +6,7 @@ import NavItems from "./navItems/NavItems";
 import {useDispatch} from "react-redux";
 import {authAPI} from "../../api/api";
 
-const Navbar = ({isAuth, rerenderCart}) => {
+const Navbar = ({isAuth, rerenderCart, navbar, closeNavbar}) => {
     const [modal, setModal] = useState(false)
     const dispatch = useDispatch()
 
@@ -14,13 +14,14 @@ const Navbar = ({isAuth, rerenderCart}) => {
         await authAPI.logout(dispatch)
     }
 
+
     return (
-        <div className="side js-side">
-            <div className="side__inner">
+        <div className="side js-side" style={navbar ? {zIndex: "2", position: "fixed"} : {zIndex: "0", position: "absolute"}}>
+            <div className="side__inner" style={navbar ? {opacity: "1", visibility: 'visible'} : {opacity: "0", visibility: "hidden"}}>
                 <img src={nav_logo} alt="logo"/>
                 <nav className="nav">
                     <ul className="nav__list">
-                        <NavItems pathway={"/"} name={"Главная"}>
+                        <NavItems pathway={"/"} name={"Главная"} closeNavbar={closeNavbar}>
                             <svg className="nav__list-link-icon" width="25" height="25" viewBox="0 0 25 25"
                                  fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -28,7 +29,7 @@ const Navbar = ({isAuth, rerenderCart}) => {
                                     stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                         </NavItems>
-                        <NavItems pathway={"/shop"} name={"Все товары"}>
+                        <NavItems pathway={"/shop"} name={"Все товары"} closeNavbar={closeNavbar}>
                             <svg className="nav__list-link-icon" width="26" height="22" viewBox="0 0 26 22"
                                  fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -37,7 +38,7 @@ const Navbar = ({isAuth, rerenderCart}) => {
                             </svg>
                         </NavItems>
                         {isAuth ?
-                            <NavItems rerenderCart={rerenderCart} pathway={"/cart"} name={"Корзина"}>
+                            <NavItems rerenderCart={rerenderCart} pathway={"/cart"} name={"Корзина"} closeNavbar={closeNavbar}>
                                 <svg className="nav__list-link-icon" width="25" height="25" viewBox="0 0 25 25"
                                      fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -49,7 +50,7 @@ const Navbar = ({isAuth, rerenderCart}) => {
                             : null
                         }
                         {isAuth ?
-                            <NavItems pathway={"/order"} name={"Мои заказы"}>
+                            <NavItems pathway={"/order"} name={"Мои заказы"} closeNavbar={closeNavbar}>
                                 <svg className="nav__list-link-icon" width="25" height="25" viewBox="0 0 23 23"
                                      fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clipPath="url(#clip0_4757_11064)">
@@ -145,7 +146,15 @@ const Navbar = ({isAuth, rerenderCart}) => {
 
                 </div>
             </div>
-            <Modal active={modal} setModalActive={setModal}/>
+            <div className="nav-container">
+                <input className="checkbox" onClick={() => closeNavbar(!navbar)} type="checkbox" name="" id=""/>
+                <div className="hamburger-lines" onClick={() => closeNavbar(!navbar)}>
+                    <span className="line line1"></span>
+                    <span className="line line2"></span>
+                    <span className="line line3"></span>
+                </div>
+            </div>
+                <Modal active={modal} setModalActive={setModal}/>
         </div>
     );
 }

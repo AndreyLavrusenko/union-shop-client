@@ -38,4 +38,8 @@ ul, li {
 }
 
 
-@import "media";
+@media (max-width: 1000px) {
+  .main {
+    margin-left: 0;
+  }
+}

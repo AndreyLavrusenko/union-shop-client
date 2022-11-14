@@ -2,7 +2,7 @@ import {NavLink} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {cartAPI} from "../../../api/api";
 
-const NavItems = ({name, pathway, rerenderCart, children}) => {
+const NavItems = ({name, pathway, rerenderCart, closeNavbar ,children}) => {
     const [quantityState, setQuantityState] = useState(0)
 
     // Пишет кол-во товара в корзине
@@ -18,6 +18,7 @@ const NavItems = ({name, pathway, rerenderCart, children}) => {
         <li className="nav__list-item">
             <NavLink to={pathway}
                      className={({isActive}) => isActive ? "nav__list-link active" : "nav__list-link"}
+                     onClick={() => closeNavbar(false)}
                      title={name} end>
                 {children}
                 <span className="nav__list-link-text">{name === "Корзина"

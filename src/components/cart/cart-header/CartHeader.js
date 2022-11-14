@@ -7,14 +7,14 @@ const CartHeader = ({myCart}) => {
     }, 0)
 
     return (
-        <>
+        <div className="cart__header">
             <h1 className="cart__header-title">Общая сумма корзины {price} ₽.</h1>
             <div className='cart__header-desc'>Бесплатная доставка</div>
             <Link style={{ textDecoration: "none"}} to="/create-order">
                 <button className="cart__header-button">Оформить заказ</button>
             </Link>
             <div className="cart__header-line"/>
-        </>
+        </div>
     )
 }
 

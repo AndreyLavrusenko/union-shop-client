@@ -21,7 +21,21 @@ function App() {
     const dispatch = useDispatch();
     const [copyright, setCopyright] = useState(null)
     const [rerenderCart, setRerenderCart] = useState(false)
+    const [navbar, setNavbar] = useState(true)
 
+    useEffect(() => {
+        if (window.screen.width > 1000) {
+            return setNavbar(true)
+        }
+    }, [navbar])
+
+    window.addEventListener('resize', (e) => {
+        if (e.currentTarget.innerWidth <= 1000) {
+            setNavbar(false)
+        } else {
+            setNavbar(true)
+        }
+    })
 
     // Если пользователя нет, то делаем запрос на сервер и получаем его токен
     useEffect(() => {
@@ -40,19 +54,27 @@ function App() {
         getCopyright()
     }, [user]);
 
+    const closeNavbar = (status) => {
+        setNavbar(status)
+    }
 
     return (
         <div className="wrapper">
             <Header/>
             <div className='container'>
                 <div className="main">
-                    <Navbar rerenderCart={rerenderCart} isAuth={user}/>
-                    <Routes>
-                        <Route path="/" element={<Home/>}/>
-                        <Route path="/shop" element={<All/>}/>
-                        <Route path="/product/:id" element={<Card setRerenderCart={setRerenderCart} rerenderCart={rerenderCart} isAuth={user} />}/>
-                        <Route path="/cart" element={<Cart setRerenderCart={setRerenderCart} rerenderCart={rerenderCart} isAuth={user} />}/>
-                    </Routes>
+                    <Navbar
+                        navbar={navbar}
+                        closeNavbar={closeNavbar}
+                        rerenderCart={rerenderCart}
+                        isAuth={user}
+                    />
+                        <Routes>
+                            <Route path="/" element={<Home/>}/>
+                            <Route path="/shop" element={<All/>}/>
+                            <Route path="/product/:id" element={<Card setRerenderCart={setRerenderCart} rerenderCart={rerenderCart} isAuth={user} />}/>
+                            <Route path="/cart" element={<Cart setRerenderCart={setRerenderCart} rerenderCart={rerenderCart} isAuth={user} />}/>
+                        </Routes>
                 </div>
             </div>
             <Footer copyright={copyright}/>
