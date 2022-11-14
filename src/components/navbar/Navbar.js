@@ -1,18 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './navbar.scss'
 import nav_logo from '../../assets/image/logo/nav_logo.svg'
 import Modal from "../modal/Modal";
 import NavItems from "./navItems/NavItems";
-import {useDispatch} from "react-redux";
-import {authAPI} from "../../api/api";
 
-const Navbar = ({isAuth, rerenderCart, navbar, closeNavbar}) => {
+const Navbar = ({navbar, isAuth, closeNavbar, handleLogout, quantityState}) => {
     const [modal, setModal] = useState(false)
-    const dispatch = useDispatch()
-
-    const handleLogout = async () => {
-        await authAPI.logout(dispatch)
-    }
 
 
     return (
@@ -38,7 +31,7 @@ const Navbar = ({isAuth, rerenderCart, navbar, closeNavbar}) => {
                             </svg>
                         </NavItems>
                         {isAuth ?
-                            <NavItems rerenderCart={rerenderCart} pathway={"/cart"} name={"Корзина"} closeNavbar={closeNavbar}>
+                            <NavItems quantityState={quantityState} pathway={"/cart"} name={"Корзина"} closeNavbar={closeNavbar}>
                                 <svg className="nav__list-link-icon" width="25" height="25" viewBox="0 0 25 25"
                                      fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path

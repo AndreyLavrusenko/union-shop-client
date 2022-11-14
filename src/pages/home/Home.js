@@ -1,37 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 import Card from "../../components/card/Card";
 import Preloader from "../../common/Preloader";
-import {useEffect} from "react";
-import {productAPI} from "../../api/api";
 import Advertising from "../../components/advertising/Advertising";
 import './home.scss'
 
-const Home = () => {
-    // Все товары
-    const [loading, setLoading] = useState(true)
-    const [topProduct, setTopProduct] = useState(null)
-    const [categoryProduct, setCategoryProduct] = useState(null)
-
-    const getAllProduct = async () => {
-        const topProduct = await productAPI.renderTop()
-        const categoryProduct = await productAPI.renderCategory()
-
-        setTopProduct(topProduct)
-        setCategoryProduct(categoryProduct)
-
-        setLoading(false)
-    };
-
-    // Получение популярных товаров
-    useEffect(() => {
-        getAllProduct()
-    }, [])
-
+const Home = ({loading, topProduct, categoryProduct}) => {
 
     if (loading) {
         return <Preloader/>
     }
-
 
     const {firstCategory: {data: firstCategory}, secondCategory: {data: secondCategory}, thirdCategory: {data: thirdCategory}} = categoryProduct
 

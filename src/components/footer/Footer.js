@@ -1,12 +1,27 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavLink} from "react-router-dom";
 import logo_blue from '../../assets/image/logo/logo_blue.svg'
 import vk from '../../assets/image/icon/vk.svg'
 import tg from '../../assets/image/icon/telegram.svg'
 import yt from '../../assets/image/icon/youtube.svg'
 import './footer.scss'
+import {systemAPI} from "../../api/api";
 
-const Footer = ({copyright}) => {
+const Footer = () => {
+    const [copyright, setCopyright] = useState(null)
+
+
+    // Если пользователя нет, то делаем запрос на сервер и получаем его токен
+    useEffect(() => {
+        // Получение копирайта
+        const getCopyright = async () => {
+            const data = await systemAPI.getCopyright()
+            setCopyright(data.copyright)
+        }
+        getCopyright()
+    }, []);
+
+
     return (
         <div className="footer">
             <div className="footer__wrapper">

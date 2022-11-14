@@ -133,7 +133,19 @@ export const productAPI = {
     },
 
     getProductById: async (id) => {
-        return await instance.get(`/product/${id}`)
+         try {
+             return await instance.get(`/product/${id}`)
+         } catch (err) {
+             console.log(err.response.request)
+         }
+    },
+
+    getProductQuantity: async () => {
+        try {
+            return await instance.get(`/product`)
+        } catch (err) {
+            console.log(err.response.request)
+        }
     }
 }
 
@@ -155,6 +167,15 @@ export const cartAPI = {
 
     getCart: async () => {
         const {data} = await instance.get('/cart/all', {
+            headers: {
+                token: `Bearer ${TOKEN}`
+            }
+        })
+        return data
+    },
+
+    getCartQuantity: async () => {
+        const {data} = await instance.get('/cart/quantity', {
             headers: {
                 token: `Bearer ${TOKEN}`
             }

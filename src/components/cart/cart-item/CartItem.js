@@ -1,21 +1,7 @@
-import {useEffect, useState} from "react";
-import {cartAPI, productAPI} from "../../../api/api";
 import {Link} from "react-router-dom";
 
 
-const CartItem = ({cart, handleDelete}) => {
-    const [product, setProduct] = useState([])
-    const color = cart.color
-
-
-    useEffect(() => {
-        const getProductInfo = async () => {
-            const {data} = await productAPI.getProductById(cart.productId)
-            setProduct(data.result[0])
-        }
-        getProductInfo()
-    }, [])
-
+const CartItem = ({cart, productCountAvailable, color, handleDelete, product}) => {
 
     return (
         <div className="cart__info" key={cart.id}>
@@ -26,7 +12,14 @@ const CartItem = ({cart, handleDelete}) => {
                 <div className="cart__info-main">
                     <div className="cart__info-left">
                         <div className="cart__left">
-                            <Link to={`/product/${cart.productId}`} className="cart__left-title">{product.title}</Link>
+                            {productCountAvailable < 0
+                                ? <Link to={`/product/${cart.productId}`} className="cart__left-title">{product.title}
+                                    <span> (нет в наличии)</span></Link>
+
+                                : <Link to={`/product/${cart.productId}`}
+                                className="cart__left-title">{product.title}</Link>
+                            }
+
                             <div className="cart__left-desc">{product.description} -</div>
                             <div className="cart__left-desc">{cart.productName}</div>
                             <div className="cart__left-option">
@@ -44,11 +37,13 @@ const CartItem = ({cart, handleDelete}) => {
                     </div>
                     <div className="cart__info-right">
                         <div className="cart__right">
-                            <div className="cart__right-price">{cart.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ₽"}</div>
+                            <div
+                                className="cart__right-price">{cart.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ₽"}</div>
                             <button
                                 className="cart__right-delete"
                                 onClick={() => handleDelete(cart.id)}
-                            >Удалить</button>
+                            >Удалить
+                            </button>
                         </div>
                     </div>
                 </div>

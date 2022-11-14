@@ -1,83 +1,35 @@
-import {useDispatch, useSelector} from "react-redux";
 import {Routes, Route} from "react-router-dom";
-import {useEffect, useState} from "react";
-import {authAPI, systemAPI} from "./api/api";
-
-import Home from "./pages/home/Home";
-import All from "./pages/all/All";
 import Header from "./components/header/Header";
-import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
-import Card from "./pages/card/Card";
 import Cart from "./pages/cart/Cart";
 
 import './style/global.scss'
 import './style/normalize.scss'
+import NavbarContainer from "./components/navbar/NavbarContainer";
+import HomeContainer from "./pages/home/HomeContainer";
+import AllContainer from "./pages/all/AllContainer";
+import CardContainer from "./pages/card/CardContainer";
+import CartContainer from "./pages/cart/CartContainer";
 
 
-function App() {
-    // Получаем из стора текущего пользователя
-    const user = useSelector(state => state.user.currentUser);
-    const dispatch = useDispatch();
-    const [copyright, setCopyright] = useState(null)
-    const [rerenderCart, setRerenderCart] = useState(false)
-    const [navbar, setNavbar] = useState(true)
-
-    useEffect(() => {
-        if (window.screen.width > 1000) {
-            return setNavbar(true)
-        }
-    }, [navbar])
-
-    window.addEventListener('resize', (e) => {
-        if (e.currentTarget.innerWidth <= 1000) {
-            setNavbar(false)
-        } else {
-            setNavbar(true)
-        }
-    })
-
-    // Если пользователя нет, то делаем запрос на сервер и получаем его токен
-    useEffect(() => {
-        const getUserLogin = async () => {
-            if (!user) {
-                await authAPI.loginByThirdPartyService(dispatch)
-            }
-        }
-        getUserLogin()
-
-        // Получение копирайта
-        const getCopyright = async () => {
-            const data = await systemAPI.getCopyright()
-            setCopyright(data.copyright)
-        }
-        getCopyright()
-    }, [user]);
-
-    const closeNavbar = (status) => {
-        setNavbar(status)
-    }
+function App({quantityState, setQuantityState}) {
 
     return (
         <div className="wrapper">
             <Header/>
             <div className='container'>
                 <div className="main">
-                    <Navbar
-                        navbar={navbar}
-                        closeNavbar={closeNavbar}
-                        rerenderCart={rerenderCart}
-                        isAuth={user}
-                    />
-                        <Routes>
-                            <Route path="/" element={<Home/>}/>
-                            <Route path="/shop" element={<All/>}/>
-                            <Route path="/product/:id" element={<Card setRerenderCart={setRerenderCart} rerenderCart={rerenderCart} isAuth={user} />}/>
-                            <Route path="/cart" element={<Cart setRerenderCart={setRerenderCart} rerenderCart={rerenderCart} isAuth={user} />}/>
-                        </Routes>
+                    <NavbarContainer quantityState={quantityState} setQuantityState={setQuantityState}/>
+
+                    <Routes>
+                        <Route path="/" element={<HomeContainer/>}/>
+                        <Route path="/shop" element={<AllContainer/>}/>
+                        <Route path="/product/:id" element={<CardContainer setQuantityState={setQuantityState} />}/>
+                        <Route path="/cart" element={<CartContainer setQuantityState={setQuantityState} />}/>
+                    </Routes>
                 </div>
             </div>
-            <Footer copyright={copyright}/>
+            <Footer/>
         </div>
 
 

@@ -1,46 +1,34 @@
 import CartHeader from "../../components/cart/cart-header/CartHeader";
 import '../../components/cart/cart.scss'
 import CartItem from "../../components/cart/cart-item/CartItem";
-import {useEffect, useState} from "react";
-import {cartAPI} from "../../api/api";
 import Preloader from "../../common/Preloader";
 import CartLetter from "../../components/cart/cart-letter/CartLetter";
 import CartCheque from "../../components/cart/cart-cheque/CartCheque";
 import './cart.scss'
-
-const Cart = ({setRerenderCart, rerenderCart}) => {
-    const [myCart, setMyCart] = useState([])
-    const [loading, setLoading] = useState(false)
-
-
-    useEffect(() => {
-        const getCartHandler = async () => {
-            setLoading(true)
-            const {result} = await cartAPI.getCart()
-            setMyCart(result)
-            setLoading(false)
-        }
-        getCartHandler()
-    }, [rerenderCart])
+import CartItemContainer from "../../components/cart/cart-item/CartItemContainer";
+import {useEffect} from "react";
+import {productAPI} from "../../api/api";
 
 
-    const handleDelete = async (id) => {
-        setRerenderCart(!rerenderCart)
-        await cartAPI.deleteItemFromCart(id)
-    }
+const Cart = ({loading, handleDelete, myCart, changeAvailable, availableBuy, productCount}) => {
 
-
-    if (loading) return <Preloader />
+    if (loading) return <Preloader/>
 
     return (
         <div className="cart__main">
-            <CartHeader myCart={myCart}/>
+            <CartHeader myCart={myCart} availableBuy={availableBuy}/>
             <div className="cart__item-wrapper">
                 {myCart.map((item, i) => (
-                    <CartItem handleDelete={handleDelete} key={i} cart={item} />
+                    <CartItemContainer
+                        availableBuy={availableBuy}
+                        changeAvailable={changeAvailable}
+                        handleDelete={handleDelete}
+                        productCount={productCount}
+                        key={i}
+                        cart={item}/>
                 ))}
-            <CartLetter />
-            <CartCheque myCart={myCart}/>
+                <CartLetter/>
+                <CartCheque availableBuy={availableBuy} myCart={myCart}/>
             </div>
         </div>
     )

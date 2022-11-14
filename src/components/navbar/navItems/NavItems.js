@@ -1,18 +1,7 @@
 import {NavLink} from "react-router-dom";
-import React, {useEffect, useState} from "react";
-import {cartAPI} from "../../../api/api";
+import React from "react";
 
-const NavItems = ({name, pathway, rerenderCart, closeNavbar ,children}) => {
-    const [quantityState, setQuantityState] = useState(0)
-
-    // Пишет кол-во товара в корзине
-    useEffect(() => {
-        const getCartCount = async () => {
-            const data = await cartAPI.getCart()
-            setQuantityState(data.result.length)
-        }
-        getCartCount()
-    }, [rerenderCart])
+const NavItems = ({quantityState, pathway, name, closeNavbar, children}) => {
 
     return (
         <li className="nav__list-item">

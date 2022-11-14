@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 
-const CartCheque = ({myCart}) => {
+const CartCheque = ({myCart, availableBuy}) => {
     const price = myCart.reduce((accumulator, object) => {
         return accumulator + object.price
     }, 0)
@@ -70,7 +70,11 @@ const CartCheque = ({myCart}) => {
                         и передаются в зашифрованном виде.</p>
                 </div>
 
-                <Link style={{ textDecoration: "none"}} to="/create-order" className="cart__check-button">Оформить заказ</Link>
+                {availableBuy
+                    ? <Link style={{ textDecoration: "none"}} to="/create-order" className="cart__check-button">Оформить заказ</Link>
+                    : <button style={{ textDecoration: "none", backgroundColor: "#0707e1", cursor: "not-allowed"}} className="cart__check-button">Доступны не все товары</button>
+                }
+
             </div>
 
         </div>
