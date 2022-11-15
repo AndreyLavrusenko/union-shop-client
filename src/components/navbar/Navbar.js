@@ -140,7 +140,7 @@ const Navbar = ({navbar, isAuth, closeNavbar, handleLogout, quantityState}) => {
                 </div>
             </div>
             <div className="nav-container">
-                <input className="checkbox" onClick={() => closeNavbar(!navbar)} type="checkbox" name="" id=""/>
+                <input className="checkbox" type="checkbox" name="" id=""/>
                 <div className="hamburger-lines" onClick={() => closeNavbar(!navbar)}>
                     <span className="line line1"></span>
                     <span className="line line2"></span>

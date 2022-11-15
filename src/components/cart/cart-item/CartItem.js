@@ -1,10 +1,15 @@
 import {Link} from "react-router-dom";
 
 
-const CartItem = ({cart, productCountAvailable, color, handleDelete, product}) => {
+const CartItem = ({cart, color, handleDelete, product, changeAvailable}) => {
+
+    if (cart.count === 0) {
+        changeAvailable(false)
+    }
+
 
     return (
-        <div className="cart__info" key={cart.id}>
+        <div className="cart__info" key={cart.uniqCode}>
             <div className="cart__info-wrapper">
                 <div className="cart__info-block">
                     <img src={product.image} alt="" className="cart__info-img"/>
@@ -12,11 +17,11 @@ const CartItem = ({cart, productCountAvailable, color, handleDelete, product}) =
                 <div className="cart__info-main">
                     <div className="cart__info-left">
                         <div className="cart__left">
-                            {productCountAvailable < 0
-                                ? <Link to={`/product/${cart.productId}`} className="cart__left-title">{product.title}
+                            {cart.quantity > cart.count
+                                ? <Link to={`/product/${product.id}`} className="cart__left-title">{product.title}
                                     <span> (нет в наличии)</span></Link>
 
-                                : <Link to={`/product/${cart.productId}`}
+                                : <Link to={`/product/${product.id}`}
                                 className="cart__left-title">{product.title}</Link>
                             }
 
@@ -35,6 +40,11 @@ const CartItem = ({cart, productCountAvailable, color, handleDelete, product}) =
                         </div>
 
                     </div>
+
+                    <div className="cart__info-count">
+                        {cart.quantity}
+                    </div>
+
                     <div className="cart__info-right">
                         <div className="cart__right">
                             <div

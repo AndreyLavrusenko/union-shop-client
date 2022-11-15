@@ -95,11 +95,11 @@ export const productAPI = {
     // Рендер 3 полосок после популярной
     renderCategory: async () => {
         try {
-            const firstCategory = await instance.get('product/popular/1')
+            const firstCategory = await instance.get('product/popular/first')
 
-            const secondCategory = await instance.get('product/popular/2')
+            const secondCategory = await instance.get('product/popular/second')
 
-            const thirdCategory = await instance.get('product/popular/3')
+            const thirdCategory = await instance.get('product/popular/third')
 
             return {
                 firstCategory,
@@ -140,13 +140,7 @@ export const productAPI = {
          }
     },
 
-    getProductQuantity: async () => {
-        try {
-            return await instance.get(`/product`)
-        } catch (err) {
-            console.log(err.response.request)
-        }
-    }
+
 }
 
 
@@ -168,7 +162,16 @@ export const cartAPI = {
     getCart: async () => {
         const {data} = await instance.get('/cart/all', {
             headers: {
-                token: `Bearer ${TOKEN}`
+                token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
+            }
+        })
+        return data
+    },
+
+    getItemFromCart: async (uniqCode) => {
+        const {data} = await instance.get(`/cart/item/${uniqCode}`, {
+            headers: {
+                token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
             }
         })
         return data
@@ -177,7 +180,7 @@ export const cartAPI = {
     getCartQuantity: async () => {
         const {data} = await instance.get('/cart/quantity', {
             headers: {
-                token: `Bearer ${TOKEN}`
+                token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
             }
         })
         return data

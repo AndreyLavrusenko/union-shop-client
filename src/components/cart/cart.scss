@@ -64,6 +64,16 @@
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    position: relative;
+  }
+
+  &-count {
+    position: absolute;
+    right: 500px;
+    top: 10px;
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 22px;
   }
 
   &-main {
@@ -114,6 +124,7 @@
       font-size: 12px;
       position: relative;
       top: -2px;
+      left: 5px;
     }
   }
 

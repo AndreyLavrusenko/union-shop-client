@@ -1,51 +1,48 @@
 import React, {useEffect, useState} from 'react';
-import {cartAPI, productAPI} from "../../api/api";
+import {cartAPI} from "../../api/api";
 import Cart from "./Cart";
+import {useSelector} from "react-redux";
 
 const CartContainer = ({setQuantityState}) => {
+    const user = useSelector(state => state.user.currentUser);
+
     const [availableBuy, setAvailableBuy] = useState(true)
     const [myCart, setMyCart] = useState([])
-    const [loading, setLoading] = useState(false)
-    const [productCount, setProductCount] = useState([])
+    const [loading, setLoading] = useState(true)
     const [cartUpdate, setCartUpdate] = useState(true)
 
 
+    // Получение товаров в корзине и количество этого товара в наличии из таблицы all_products
     useEffect(() => {
         const getAllProduct = async () => {
-            // Получение всех товаров
-            const res = await productAPI.getProductQuantity()
-            setProductCount(res.data)
+            const res = await cartAPI.getCart()
+            if (res.resultCode) {
+                setMyCart([])
+            } else {
+                setMyCart(res)
+            }
+            setLoading(false)
         }
 
         getAllProduct()
-    }, [])
+    }, [user, cartUpdate])
 
+
+    // Получение кол-ва товаров в корзине
     useEffect(() => {
         const getCartCount = async () => {
-            // Получение кол-ва товаров в корзине
             const data = await cartAPI.getCartQuantity()
             setQuantityState(Object.values(data)[0])
         }
         getCartCount()
-    }, [cartUpdate])
+    }, [cartUpdate, user, availableBuy])
 
-
-    useEffect(() => {
-        const getCartHandler = async () => {
-            setLoading(true)
-            // Получение товаров в корзине
-            const {result} = await cartAPI.getCart()
-            setMyCart(result)
-            setLoading(false)
-        }
-        getCartHandler()
-    }, [availableBuy])
 
 
     // Удаление элемента из корзины
     const handleDelete = async (id) => {
         // Делаем кнопку заказа достпуной
-        setAvailableBuy(true)
+        // setAvailableBuy(true)
         setCartUpdate(!cartUpdate)
         // Удаление товара из корзины
         await cartAPI.deleteItemFromCart(id)
@@ -63,7 +60,6 @@ const CartContainer = ({setQuantityState}) => {
             changeAvailable={changeAvailable}
             handleDelete={handleDelete}
             availableBuy={availableBuy}
-            productCount={productCount}
         />
     );
 };

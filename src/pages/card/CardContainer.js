@@ -34,7 +34,7 @@ const CardContainer = ({setQuantityState}) => {
     useEffect(() => {
         const getCartCount = async () => {
             const data = await cartAPI.getCart()
-            setQuantityState(data.result.length)
+            setQuantityState(data.length)
         }
         getCartCount()
     }, [rerenderCart])

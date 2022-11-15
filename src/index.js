@@ -4,7 +4,7 @@ import {BrowserRouter, useLocation} from "react-router-dom";
 import {persist, store} from "./redux/store";
 import {Provider} from "react-redux";
 import {PersistGate} from "redux-persist/integration/react";
-import AppContainer from "./AppContainer";
+import App from "./App";
 
 const Wrapper = ({ children }) => {
     const location = useLocation()
@@ -21,7 +21,7 @@ root.render(
         <Wrapper>
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persist}>
-                    <AppContainer />
+                    <App />
                 </PersistGate>
             </Provider>
         </Wrapper>

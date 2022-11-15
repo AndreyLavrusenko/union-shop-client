@@ -292,13 +292,13 @@
   }
 
   .nav-container .hamburger-lines {
-    display: block;
     height: 26px;
     width: 32px;
     position: absolute;
     top: 17px;
     left: 20px;
-    z-index: 2;
+    z-index: 20;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

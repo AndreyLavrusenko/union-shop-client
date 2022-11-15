@@ -10,9 +10,14 @@ import HomeContainer from "./pages/home/HomeContainer";
 import AllContainer from "./pages/all/AllContainer";
 import CardContainer from "./pages/card/CardContainer";
 import CartContainer from "./pages/cart/CartContainer";
+import {useState} from "react";
+import {useSelector} from "react-redux";
 
 
-function App({quantityState, setQuantityState}) {
+function App() {
+    // Кол-во элементов в корзине
+    const [quantityState, setQuantityState] = useState(0)
+
 
     return (
         <div className="wrapper">

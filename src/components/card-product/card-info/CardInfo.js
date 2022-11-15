@@ -30,6 +30,7 @@ const CardInfo = ({productData, productInfo, isAuth, setRerenderCart, rerenderCa
     const [colorError, setColorError] = useState(false)
     const [modal, setModal] = useState(false)
 
+
     let price = null
     let title_product = ''
 
@@ -104,6 +105,7 @@ const CardInfo = ({productData, productInfo, isAuth, setRerenderCart, rerenderCa
     setPriceHandler()
 
 
+
     // Добавление товара в корзину
     const addToCart = async () => {
         if (!isAuth) {
@@ -115,7 +117,7 @@ const CardInfo = ({productData, productInfo, isAuth, setRerenderCart, rerenderCa
                 const id = productData.id
                 const name = title_product.title_product
 
-                await cartAPI.setProduct({name, price, id, color: activeColor, size: activeSize}, dispatch)
+                await cartAPI.setProduct({name, price, id, color: activeColor,  size: activeSize}, dispatch)
 
                 setActiveSize(productInfo[0].size)
                 setActiveColor(null)
