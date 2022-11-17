@@ -27,7 +27,7 @@ const NavbarContainer = ({setQuantityState, quantityState}) => {
     useEffect(() => {
         const getCartCount = async () => {
             const data = await cartAPI.getCartQuantity()
-            setQuantityState(Object.values(data)[0])
+            setQuantityState(data)
         }
         getCartCount()
     }, [rerenderCart])

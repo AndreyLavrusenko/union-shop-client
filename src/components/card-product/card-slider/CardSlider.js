@@ -1,7 +1,7 @@
 import './cardSlider.scss'
 import {useState} from "react";
 
-const CardSlider = ({images, image, title}) => {
+const CardSlider = ({images, image, title, background}) => {
     const [activeImg, setActiveImg] = useState(image)
 
 
@@ -18,7 +18,7 @@ const CardSlider = ({images, image, title}) => {
 
     return (
         <div className="cardslider">
-            <div className="cardslider__main">
+            <div className="cardslider__main" style={{backgroundColor: background}}>
                 {/*Главная картинка images*/}
                 <img className="cardslider__main-img" src={activeImg.toString()} alt={title} />
             </div>

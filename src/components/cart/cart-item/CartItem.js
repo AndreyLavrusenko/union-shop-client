@@ -1,15 +1,14 @@
 import {Link} from "react-router-dom";
 
 
-const CartItem = ({cart, color, handleDelete, product, changeAvailable}) => {
+const CartItem = ({cart, color, handleDelete, product}) => {
 
-    if (cart.count === 0) {
-        changeAvailable(false)
-    }
-
+    // if (cart.count === 0) {
+    //     changeAvailable(false)
+    // }
 
     return (
-        <div className="cart__info" key={cart.uniqCode}>
+        <div className="cart__info" key={cart.id}>
             <div className="cart__info-wrapper">
                 <div className="cart__info-block">
                     <img src={product.image} alt="" className="cart__info-img"/>

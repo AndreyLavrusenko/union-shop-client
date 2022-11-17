@@ -10,6 +10,7 @@ const CartContainer = ({setQuantityState}) => {
     const [myCart, setMyCart] = useState([])
     const [loading, setLoading] = useState(true)
     const [cartUpdate, setCartUpdate] = useState(true)
+    const [updateDelete, setUpdateDelete] = useState(false)
 
 
     // Получение товаров в корзине и количество этого товара в наличии из таблицы all_products
@@ -21,10 +22,12 @@ const CartContainer = ({setQuantityState}) => {
             } else {
                 setMyCart(res)
             }
+
             setLoading(false)
         }
 
-        getAllProduct()
+        getAllProduct().then(() => setUpdateDelete(!updateDelete))
+
     }, [user, cartUpdate])
 
 
@@ -32,32 +35,41 @@ const CartContainer = ({setQuantityState}) => {
     useEffect(() => {
         const getCartCount = async () => {
             const data = await cartAPI.getCartQuantity()
-            setQuantityState(Object.values(data)[0])
+            setQuantityState(data)
         }
         getCartCount()
     }, [cartUpdate, user, availableBuy])
 
 
+    // При удалении элемента из корзина, смотрит остались ли там товары, которых нет в наличии
+    // Если их нет, то разрешает покупку
+    useEffect(() => {
+        myCart.map(item => {
+            if (item.quantity > item.count) {
+                setAvailableBuy(false)
+            }
+        })
+
+    }, [updateDelete])
+
 
     // Удаление элемента из корзины
     const handleDelete = async (id) => {
-        // Делаем кнопку заказа достпуной
-        // setAvailableBuy(true)
-        setCartUpdate(!cartUpdate)
         // Удаление товара из корзины
         await cartAPI.deleteItemFromCart(id)
+        // Ререндер корзины
+        setCartUpdate(!cartUpdate)
+        setAvailableBuy(true)
     }
 
-    const changeAvailable = (status) => {
-        setAvailableBuy(status)
-    }
+
+    if (loading) return;
 
 
     return (
         <Cart
             myCart={myCart}
             loading={loading}
-            changeAvailable={changeAvailable}
             handleDelete={handleDelete}
             availableBuy={availableBuy}
         />

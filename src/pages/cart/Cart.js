@@ -8,7 +8,7 @@ import CartItemContainer from "../../components/cart/cart-item/CartItemContainer
 
 
 
-const Cart = ({loading, handleDelete, myCart, changeAvailable, availableBuy}) => {
+const Cart = ({loading, handleDelete, myCart, availableBuy}) => {
 
     if (loading) return <Preloader/>
 
@@ -20,7 +20,6 @@ const Cart = ({loading, handleDelete, myCart, changeAvailable, availableBuy}) =>
                 {myCart.map((item, i) => (
                     <CartItemContainer
                         availableBuy={availableBuy}
-                        changeAvailable={changeAvailable}
                         handleDelete={handleDelete}
                         key={i}
                         cart={item}/>

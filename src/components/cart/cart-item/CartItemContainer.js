@@ -6,7 +6,6 @@ import {cartAPI} from "../../../api/api";
 const CartItemContainer = ({
                                cart,
                                handleDelete,
-                               changeAvailable,
 
                            }) => {
 
@@ -26,7 +25,7 @@ const CartItemContainer = ({
 
         getProductInfo()
 
-    }, [])
+    }, [cart])
 
     if (!loading) {
         return (
@@ -35,7 +34,6 @@ const CartItemContainer = ({
                 product={product}
                 cart={cart}
                 color={color}
-                changeAvailable={changeAvailable}
             />
         );
     }

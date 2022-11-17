@@ -11,7 +11,6 @@ import AllContainer from "./pages/all/AllContainer";
 import CardContainer from "./pages/card/CardContainer";
 import CartContainer from "./pages/cart/CartContainer";
 import {useState} from "react";
-import {useSelector} from "react-redux";
 
 
 function App() {

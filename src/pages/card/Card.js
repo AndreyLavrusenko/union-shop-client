@@ -12,9 +12,10 @@ const Card = ({loading, isAuth, setRerenderCart, productData, productInfo, reren
         )
     }
 
+
     return (
         <div className="card">
-            <CardSlider image={productData.image} images={productData.image_arr} title={productData.title}/>
+            <CardSlider image={productData.image} background={productData.backgroundcolor} images={productData.image_arr} title={productData.title}/>
             <CardInfo
                 setRerenderCart={setRerenderCart}
                 rerenderCart={rerenderCart}

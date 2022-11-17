@@ -33,8 +33,8 @@ const CardContainer = ({setQuantityState}) => {
     // Пишет кол-во товара в корзине
     useEffect(() => {
         const getCartCount = async () => {
-            const data = await cartAPI.getCart()
-            setQuantityState(data.length)
+            const data = await cartAPI.getCartQuantity()
+            setQuantityState(data)
         }
         getCartCount()
     }, [rerenderCart])
