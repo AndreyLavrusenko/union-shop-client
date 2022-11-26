@@ -1,9 +1,19 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const CartLetter = () => {
     const [isInput, setIsInput] = useState(false)
     const [letter, setLetter] = useState("")
 
+    useEffect(() => {
+        if (localStorage.getItem("letter")) {
+            setLetter(localStorage.getItem("letter"))
+        }
+    }, [])
+
+    const saveLetterText = (text) => {
+        setLetter(text);
+        localStorage.setItem('letter', text);
+    }
 
     return (
         <div className="cart__letter">
@@ -16,7 +26,7 @@ const CartLetter = () => {
                                 placeholder="Ваш текст"
                                 className="cart__letter-input"
                                 value={letter}
-                                onChange={e => setLetter(e.target.value)}
+                                onChange={e => saveLetterText(e.target.value)}
                             />
                         </div>
                         <button

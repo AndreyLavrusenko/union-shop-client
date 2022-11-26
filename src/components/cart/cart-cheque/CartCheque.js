@@ -1,8 +1,8 @@
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 const CartCheque = ({myCart, availableBuy}) => {
     const price = myCart.reduce((accumulator, object) => {
-        return accumulator + object.price
+        return accumulator + object.price * object.quantity
     }, 0)
 
 
@@ -71,12 +71,10 @@ const CartCheque = ({myCart, availableBuy}) => {
                 </div>
 
                 {availableBuy
-                    ? <Link style={{ textDecoration: "none"}} to="/create-order" className="cart__check-button">Оформить заказ</Link>
+                    ? <NavLink style={{ textDecoration: "none"}} to="/delivery-method" className="cart__check-button">Оформить заказ</NavLink>
                     : <button style={{ textDecoration: "none", backgroundColor: "#0707e1", cursor: "not-allowed"}} className="cart__check-button">Доступны не все товары</button>
                 }
-
             </div>
-
         </div>
     )
 }

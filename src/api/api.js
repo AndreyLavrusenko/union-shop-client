@@ -192,6 +192,33 @@ export const cartAPI = {
 }
 
 
+export const orderAPI = {
+    createOrder: async (deliverType, letter) => {
+       return await instance.post('/order/delivery-method', {deliverType, letter}, {
+            headers: {
+                token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
+            }
+        })
+    },
+
+    getOrderSum: async () => {
+        return await instance.get('/order/order-sum', {
+            headers: {
+                token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
+            }
+        })
+    },
+
+    setNewDeliveryPrice: async (price, deliveryType) => {
+        return await instance.post('/order/change-price', {price, deliveryType}, {
+            headers: {
+                token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
+            }
+        })
+    }
+}
+
+
 export const systemAPI = {
     getCopyright: async () => {
         const {data} = await instance.get('system/copyright')

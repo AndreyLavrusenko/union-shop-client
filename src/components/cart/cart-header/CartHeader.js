@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 const CartHeader = ({myCart, availableBuy}) => {
     const price = myCart.reduce((accumulator, object) => {
-        return accumulator + object.price
+        return accumulator + object.price * object.quantity
     }, 0)
 
     return (
@@ -11,7 +11,7 @@ const CartHeader = ({myCart, availableBuy}) => {
             <h1 className="cart__header-title">Общая сумма корзины {price} ₽.</h1>
             <div className='cart__header-desc'>Бесплатная доставка</div>
             {availableBuy
-                ? <Link style={{ textDecoration: "none"}} to="/create-order">
+                ? <Link style={{ textDecoration: "none"}} to="/delivery-method">
                     <button className="cart__header-button">Оформить заказ</button>
                 </Link>
                 : <div style={{marginBottom: "40px"}}/>
