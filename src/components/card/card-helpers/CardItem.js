@@ -1,12 +1,25 @@
 import {NavLink} from "react-router-dom";
+import {forwardRef, useEffect, useState} from "react";
+import { useLocation } from "react-router-dom";
 
-const CardItem = ({backgroundcolor, color, image, subtitle, title, isLogo, id}) => {
+
+const CardItem = forwardRef(({backgroundcolor, color, subColor, image, subtitle, title, isLogo, id}, ref) => {
+    const location = useLocation()
+    const [isShop, setShop] = useState(false)
+
+    // Если это магазин /shop то убираем анимацию
+    useEffect(() => {
+        if (location.pathname === '/') {
+            setShop(true)
+        }
+    }, [])
 
     return (
-        <NavLink to={`/product/${id}`} key={id} className="stripe__card" style={{backgroundColor: backgroundcolor, color: color}}>
+        <NavLink ref={ref} to={`/product/${id}`} key={id} className={isShop ? "stripe__card stripe__card-hover" : "stripe__card"} style={{backgroundColor: backgroundcolor, color: color}}>
             <div className="stripe__card__header">
                 <div className="stripe__header__title">{title}</div>
-                <div className="stripe__header__subtitle">{subtitle}</div>
+                <div className="stripe__header__subtitle"
+                     style={subColor ? {color: subColor} : {color: color}}>{subtitle}</div>
                 {isLogo
                     ? <svg width="66" height="73" viewBox="0 0 66 73" stroke={color} fill="none"
                            xmlns="http://www.w3.org/2000/svg">
@@ -63,6 +76,6 @@ const CardItem = ({backgroundcolor, color, image, subtitle, title, isLogo, id}) 
             </div>
         </NavLink>
     )
-}
+})
 
 export default CardItem;

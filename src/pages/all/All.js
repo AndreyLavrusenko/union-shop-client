@@ -19,10 +19,7 @@ const All = ({changePage, pages, activeCategory, loading, setActiveCategory, pro
         <>
             <Search setSearchProduct={setSearchProduct} setActiveCategory={setActiveCategory}/>
             <Category setSearch={setSearch} setActiveCategory={setActiveCategory} activeCategory={activeCategory}/>
-            {loading
-                ? <div style={{position: "relative", left: "-90px", top: 150+"px"}}><Preloader /></div>
-                : <div className="all"><AllCard search={search} products={products}/></div>
-            }
+                <div className="all"><AllCard search={search} products={products}/></div>
             <Pagination loading={loading} pages={pages} changePage={changePage}/>
         </>
 

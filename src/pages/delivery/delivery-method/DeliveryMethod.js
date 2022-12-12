@@ -1,6 +1,6 @@
 import React from 'react';
-import './deliveryMethod.scss'
-import DeliveryMethodComponent from "../../components/create-order/create-pages/DeliveryMethodComponent";
+import '../delivery.scss'
+import DeliveryMethodComponent from "../../../components/create-order/create-pages/DeliveryMethodComponent";
 
 
 const DeliveryMethod = () => {

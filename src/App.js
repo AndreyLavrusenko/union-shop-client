@@ -11,9 +11,9 @@ import AllContainer from "./pages/all/AllContainer";
 import CardContainer from "./pages/card/CardContainer";
 import CartContainer from "./pages/cart/CartContainer";
 import {useState} from "react";
-import DeliveryMethod from "./pages/delivery-method/DeliveryMethod";
-import DeliveryType from "./pages/delivery-type/DeliveryType";
-import DeliveryInfo from "./pages/delivery-info/DeliveryInfo";
+import DeliveryMethod from "./pages/delivery/delivery-method/DeliveryMethod";
+import DeliveryType from "./pages/delivery/delivery-type/DeliveryType";
+import DeliveryInfo from "./pages/delivery/delivery-info/DeliveryInfo";
 
 
 function App() {

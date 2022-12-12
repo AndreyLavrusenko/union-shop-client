@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import All from "./All";
 import {productAPI} from "../../api/api";
 
+
 const AllContainer = () => {
     const [products, setProducts] = useState([])
     const [activeCategory, setActiveCategory] = useState(null)
@@ -39,6 +40,7 @@ const AllContainer = () => {
             products={products}
             pages={pages}
         />
+
     );
 };
 

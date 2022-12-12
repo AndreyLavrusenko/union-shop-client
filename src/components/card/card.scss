@@ -31,14 +31,15 @@
     padding: 10px;
     margin: 50px 15px 80px 20px;
 
-    &:hover {
+    position: relative;
+
+    &-hover:hover {
       transition: .5s;
       transform: scale(1.04);
     }
 
-    &:not(:hover) {
-      transition: .3s;
-      transform: scale(1);
+    &-hover:not(:hover) {
+      transition: .4s;
     }
 
     &__header {
@@ -47,11 +48,14 @@
 
     &__content {
       text-align: center;
-      margin-top: 50px;
+      width: 260px;
+
+      position: absolute;
+      bottom: 5px;
 
       img {
-        width: 180px;
-        height: 180px;
+        max-width: 195px;
+        height: 100%;
         object-fit: contain;
       }
     }
@@ -60,7 +64,6 @@
   &__header__title {
     font-family: 'Raleway', -apple-system, sans-serif;
     font-style: normal;
-    text-transform: uppercase;
     font-weight: 700;
     font-size: 36px;
     line-height: 52px;

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import '../../../pages/delivery-method/deliveryMethod.scss'
+import '../../../pages/delivery/delivery.scss'
 import {orderAPI} from "../../../api/api";
 
 const CreateTitle = ({title, subtitle, updatePrice}) => {
@@ -12,6 +12,7 @@ const CreateTitle = ({title, subtitle, updatePrice}) => {
         }
         getSum()
     }, [updatePrice])
+
 
     return (
         <>

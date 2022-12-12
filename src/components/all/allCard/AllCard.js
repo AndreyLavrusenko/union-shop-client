@@ -1,4 +1,6 @@
 import CardItem from "../../card/card-helpers/CardItem";
+import FlipMove from "react-flip-move";
+
 
 const AllCard = ({products, search}) => {
     let filteredProducts = []
@@ -7,6 +9,7 @@ const AllCard = ({products, search}) => {
             return product.title.toLowerCase().includes(search.toLowerCase())
         })
 
+        // Если есть поисковый запрос
         return (
             <div className="all__card">
                 {filteredProducts.map(item => {
@@ -25,8 +28,9 @@ const AllCard = ({products, search}) => {
         )
     } else {
 
+        // Вывод всех карточек
         return (
-            <div className="all__card">
+            <FlipMove className="all__card">
                 {products.map(item => {
                     return <CardItem
                         key={item.id}
@@ -39,7 +43,7 @@ const AllCard = ({products, search}) => {
                         backgroundcolor={item.backgroundcolor}
                     />
                 })}
-            </div>
+            </FlipMove>
         )
     }
 }

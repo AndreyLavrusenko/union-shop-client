@@ -19,6 +19,7 @@ const Card = ({products, title, secondTitle}) => {
                         image={item.image}
                         isLogo={item.isLogo}
                         color={item.color}
+                        subColor={item.subColor}
                         backgroundcolor={item.backgroundcolor}/>
                 })}
             </div>

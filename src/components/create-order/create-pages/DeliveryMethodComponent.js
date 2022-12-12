@@ -18,7 +18,10 @@ const DeliveryMethodComponent = () => {
 
     return (
         <div>
-            <CreateTitle subtitle={"Как вы хотите получить ваш заказ?"} title={"Оформление заказа"}/>
+            <div className="create__title">
+                <h1>Как вы хотите получить ваш заказ?</h1>
+                <p>Оформление заказа</p>
+            </div>
             <NavLink to="/delivery-type" className="create__order">
                 <div onClick={() => {
                     setNextPage("delivery")

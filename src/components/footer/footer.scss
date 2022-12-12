@@ -1,5 +1,7 @@
+@import "src/style/color";
+
 .footer {
-  background-color: black;
+  background-color: $black;
   height: 225px;
   max-width: 100% !important;
   width: 100vw;

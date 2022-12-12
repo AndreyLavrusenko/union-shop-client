@@ -12,7 +12,7 @@
 
 .search > h1,
 .search > h3 {
-  color: black;
+  color: $black;
   margin-bottom: 15px;
 }
 
@@ -23,7 +23,7 @@
 
 .search > div:after {
   content: "";
-  background: black;
+  background: $black;
   width: 2px;
   height: 16px;
   position: absolute;
@@ -34,20 +34,20 @@
 
 .search > div > input {
   cursor: pointer;
-  color: black;
+  color: $black;
   font-size: 14px;
   background: transparent;
   width: 10px;
   height: 10px;
   padding: 10px;
-  border: solid 2px black;
+  border: solid 2px $black;
   outline: none;
   border-radius: 35px;
   transition: width 0.5s;
 }
 
 .search > div > input::placeholder {
-  color: black;
+  color: $black;
   opacity: 0;
   transition: opacity 150ms ease-out;
 }

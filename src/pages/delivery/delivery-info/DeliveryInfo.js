@@ -1,6 +1,6 @@
 import React from 'react';
-import '../delivery-method/deliveryMethod.scss'
-import DeliveryInfoComponent from "../../components/create-order/create-pages/DeliveryInfoComponent";
+import '../delivery.scss'
+import DeliveryInfoComponent from "../../../components/create-order/create-pages/DeliveryInfoComponent";
 
 const DeliveryInfo = () => {
     return (

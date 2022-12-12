@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import CreateTitle from "../create-title/CreateTitle";
-import {Link, NavLink} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {orderAPI} from "../../../api/api";
 
 
@@ -24,6 +24,8 @@ const DeliveryButton = ({text, price, setIsSelected, isSelected, id, setPrice, s
 
 
 const DeliveryTypeComponent = () => {
+    const navigate = useNavigate()
+
     const [isSelected, setIsSelected] = useState(0)
     const [price, setPrice] = useState(0)
     const [type, setType] = useState("")
@@ -37,6 +39,8 @@ const DeliveryTypeComponent = () => {
     const setDeliveryType = async () => {
         await orderAPI.setNewDeliveryPrice(price, type)
         setUpdatePrice(!updatePrice)
+
+        return navigate("/delivery-info");
     }
 
     return (
@@ -48,7 +52,7 @@ const DeliveryTypeComponent = () => {
                 <DeliveryButton id={3} setPrice={setPrice} setType={setType} isSelected={isSelected} setIsSelected={setIsSelected} text={"Бесплатная доставка"} price={0} />
 
                 {isSelected
-                    ? <NavLink to="/delivery-info" className="delivery__type-button" onClick={setDeliveryType}>Продолжить</NavLink>
+                    ? <button className="delivery__type-button" onClick={setDeliveryType}>Продолжить</button>
                     : null
                 }
             </div>

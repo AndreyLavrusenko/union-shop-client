@@ -148,6 +148,7 @@ export const cartAPI = {
     setProduct: async (product, dispatch) => {
         dispatch(cartStart())
         try {
+            console.log(product)
             const res = await instance.post('/cart', product, {
                 headers: {
                     token: `Bearer ${TOKEN}`
@@ -211,6 +212,14 @@ export const orderAPI = {
 
     setNewDeliveryPrice: async (price, deliveryType) => {
         return await instance.post('/order/change-price', {price, deliveryType}, {
+            headers: {
+                token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
+            }
+        })
+    },
+
+    deleteCostOfDelivery: async () => {
+        return await instance.put('/order/delete-delivery-method', {
             headers: {
                 token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
             }

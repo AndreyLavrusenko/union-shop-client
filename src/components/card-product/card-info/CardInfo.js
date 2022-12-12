@@ -37,7 +37,6 @@ const CardInfo = ({productData, productInfo, isAuth, setRerenderCart, rerenderCa
 
     useEffect(() => {
         // ОБнуляем выбранный цвет
-
         setActiveColor(productInfo[0].color);
         colorArr.length = 0;
         title_product = '';
@@ -115,12 +114,16 @@ const CardInfo = ({productData, productInfo, isAuth, setRerenderCart, rerenderCa
         if (showColor && showSize) {
             if (activeColor && activeSize) {
                 const id = productData.id
+                title_product = productInfo.find(item => {
+                    if (item.color === activeColor && item.size === activeSize) return item
+                })
+
                 const name = title_product.title_product
 
                 await cartAPI.setProduct({name, price, id, color: activeColor,  size: activeSize}, dispatch)
 
                 setActiveSize(productInfo[0].size)
-                setActiveColor(null)
+                setActiveColor(productInfo[0].color)
                 setColorError(false)
             } else {
                 setColorError(true)
@@ -131,12 +134,16 @@ const CardInfo = ({productData, productInfo, isAuth, setRerenderCart, rerenderCa
         if (showColor && !showSize) {
             if (activeColor) {
                 const id = productData.id
+                title_product = productInfo.find(item => {
+                    if (item.color === activeColor && item.size === activeSize) return item
+                })
+
                 const name = title_product.title_product
 
                 await cartAPI.setProduct({name, price, id, color: activeColor, size: activeSize}, dispatch)
 
                 setActiveSize(productInfo[0].size)
-                setActiveColor(null)
+                setActiveColor(productInfo[0].color)
                 setColorError(false)
             } else {
                 setColorError(true)
@@ -146,12 +153,16 @@ const CardInfo = ({productData, productInfo, isAuth, setRerenderCart, rerenderCa
         // Если для выбора ничего не доступно
         if (!showColor && !showSize) {
             const id = productData.id
+            title_product = productInfo.find(item => {
+                if (item.color === activeColor && item.size === activeSize) return item
+            })
+
             const name = title_product.title_product
 
 
             await cartAPI.setProduct({name, price, id, color: activeColor, size: activeSize}, dispatch)
 
-            setActiveColor(null)
+            setActiveColor(productInfo[0].color)
             setColorError(false)
         }
 
