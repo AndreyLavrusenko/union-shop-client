@@ -135,7 +135,7 @@ export const productAPI = {
 
     getProductById: async (id) => {
          try {
-             return await instance.get(`/product/${id}`)
+             return await instance.get(`product/${id}`)
          } catch (err) {
              console.log(err.response.request)
          }
@@ -150,7 +150,7 @@ export const cartAPI = {
         dispatch(cartStart())
         try {
             console.log(product)
-            const res = await instance.post('/cart', product, {
+            const res = await instance.post('cart', product, {
                 headers: {
                     token: `Bearer ${TOKEN}`
                 }
@@ -162,7 +162,7 @@ export const cartAPI = {
     },
 
     getCart: async () => {
-        const {data} = await instance.get('/cart/all', {
+        const {data} = await instance.get('cart/all', {
             headers: {
                 token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
             }
@@ -171,7 +171,7 @@ export const cartAPI = {
     },
 
     getItemFromCart: async (uniqCode) => {
-        const {data} = await instance.get(`/cart/item/${uniqCode}`, {
+        const {data} = await instance.get(`cart/item/${uniqCode}`, {
             headers: {
                 token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
             }
@@ -180,7 +180,7 @@ export const cartAPI = {
     },
 
     getCartQuantity: async () => {
-        const {data} = await instance.get('/cart/quantity', {
+        const {data} = await instance.get('cart/quantity', {
             headers: {
                 token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
             }
@@ -189,14 +189,14 @@ export const cartAPI = {
     },
 
     deleteItemFromCart: async (id) => {
-        await instance.delete(`/cart/${id}`)
+        await instance.delete(`cart/${id}`)
     }
 }
 
 
 export const orderAPI = {
     createOrder: async (deliverType, letter) => {
-       return await instance.post('/order/delivery-method', {deliverType, letter}, {
+       return await instance.post('order/delivery-method', {deliverType, letter}, {
             headers: {
                 token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
             }
@@ -204,7 +204,7 @@ export const orderAPI = {
     },
 
     getOrderSum: async () => {
-        return await instance.get('/order/order-sum', {
+        return await instance.get('order/order-sum', {
             headers: {
                 token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
             }
@@ -212,7 +212,7 @@ export const orderAPI = {
     },
 
     setNewDeliveryPrice: async (price, deliveryType) => {
-        return await instance.post('/order/change-price', {price, deliveryType}, {
+        return await instance.post('order/change-price', {price, deliveryType}, {
             headers: {
                 token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
             }
@@ -220,7 +220,7 @@ export const orderAPI = {
     },
 
     deleteCostOfDelivery: async () => {
-        return await instance.put('/order/delete-delivery-method', {
+        return await instance.put('order/delete-delivery-method', {
             headers: {
                 token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
             }
