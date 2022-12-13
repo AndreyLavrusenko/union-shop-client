@@ -1,7 +1,7 @@
 import './advertising.scss'
 import {useEffect, useState} from "react";
 import {productAPI} from "../../api/api";
-import Preloader from "../../common/Preloader";
+
 
 const Advertising = () => {
     const [advertising, setAdvertising] = useState(null)
@@ -22,7 +22,7 @@ const Advertising = () => {
         <>
             {
                 loading
-                    ? <Preloader/>
+                    ? null
                     : <div className="advertising">
                         <div className="advertising__wrapper">
                             <div className="advertising__left">
