@@ -20,13 +20,12 @@ if (localStorage.getItem("persist:root")) {
     if (JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser) {
         TOKEN = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser;
     }
-
 }
+
 
 const instance = axios.create({
     withCredentials: true,
-    // baseURL: "http://localhost:8080/",
-    baseURL: "https://unionshop-api.onrender.com/",
+    baseURL: process.env.REACT_APP_BACK_URI,
 })
 
 
@@ -152,7 +151,7 @@ export const cartAPI = {
             console.log(product)
             const res = await instance.post('cart', product, {
                 headers: {
-                    token: `Bearer ${TOKEN}`
+                    token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
                 }
             })
             dispatch(cartSuccess(res.data))
