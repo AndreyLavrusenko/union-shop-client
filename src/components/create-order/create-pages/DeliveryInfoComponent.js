@@ -1,17 +1,32 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import CreateTitle from "../create-title/CreateTitle";
 import {useForm} from "react-hook-form";
+import {cartAPI, orderAPI} from "../../../api/api";
+import {useNavigate} from 'react-router-dom'
 
 
 const DeliveryInfoComponent = () => {
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const getCartQuantity = async () => {
+            const count = await cartAPI.getCartQuantity()
+
+            if (count === 0) navigate("/cart");
+        }
+        getCartQuantity()
+    }, [])
+
     const {
         register,
         formState: {errors},
         handleSubmit
     } = useForm()
 
-    const onSubmit = (data) => {
-        alert(data)
+    const onSubmit = async (data) => {
+        // Записывает данные пользователя в бд
+        await orderAPI.setUserInfoDelivery(JSON.stringify(data), data.email)
+        return navigate("/delivery-pay");
     }
 
     return (
@@ -129,18 +144,35 @@ const DeliveryInfoComponent = () => {
                     <span className="order__form-label">
                        Введите промокод
                     </span>
+
                     <div className="order__form-promo">
                         <input
+                            {...register("promo")}
                             type="text"
                             name="promo"
                             className="order__form-input order__form-special"
                         />
-                        <button>Применить</button>
+                        <button type="button">Применить</button>
+                    </div>
+                    <p className="order__form-error order__promo-error">Неверный промокод</p>
+
+                    <div className="checkbox">
+                        <input required className="custom-checkbox" type="checkbox" id="conditions" name="conditions" value="conditions" />
+                        <label htmlFor="conditions">
+                            Я принимаю условия: Условия доставки и оплаты / Shipping and Payment, Согласие на обработку
+                            персональных данных / Consent to the Processing of Personal Data</label>
                     </div>
 
-                    <div>
-                        <button type="submit">faweaw</button>
+                    <div className="checkbox">
+                        <input {...register("news")} className="custom-checkbox" type="checkbox" id="news" name="news" value="true" />
+                        <label htmlFor="news">
+                            Подписаться на новости и эксклюзивные предложения
+                        </label>
                     </div>
+
+
+                    <button className="order__form-buy" type="submit">Продолжить</button>
+
                 </form>
 
 

@@ -8,7 +8,7 @@ const CreateTitle = ({title, subtitle, updatePrice}) => {
     useEffect(() => {
         const getSum = async () => {
             const {data} = await orderAPI.getOrderSum()
-            setTotal(data)
+            setTotal(data[0].total + data[0].deliveryPrice)
         }
         getSum()
     }, [updatePrice])

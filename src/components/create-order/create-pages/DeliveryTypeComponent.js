@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import CreateTitle from "../create-title/CreateTitle";
 import {Link, useNavigate} from "react-router-dom";
-import {orderAPI} from "../../../api/api";
+import {cartAPI, orderAPI} from "../../../api/api";
 
 
 const DeliveryButton = ({text, price, setIsSelected, isSelected, id, setPrice, setType}) => {
@@ -25,6 +25,16 @@ const DeliveryButton = ({text, price, setIsSelected, isSelected, id, setPrice, s
 
 const DeliveryTypeComponent = () => {
     const navigate = useNavigate()
+
+
+    useEffect(() => {
+        const getCartQuantity = async () => {
+            const count = await cartAPI.getCartQuantity()
+
+            if (count === 0) navigate("/cart");
+        }
+        getCartQuantity()
+    }, [])
 
     const [isSelected, setIsSelected] = useState(0)
     const [price, setPrice] = useState(0)

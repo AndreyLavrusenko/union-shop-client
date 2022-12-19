@@ -14,6 +14,7 @@ import {useState} from "react";
 import DeliveryMethod from "./pages/delivery/delivery-method/DeliveryMethod";
 import DeliveryType from "./pages/delivery/delivery-type/DeliveryType";
 import DeliveryInfo from "./pages/delivery/delivery-info/DeliveryInfo";
+import DeliveryPay from "./pages/delivery/delivery-pay/DeliveryPay";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
                         <Route path="/delivery-method" element={<DeliveryMethod />}/>
                         <Route path="/delivery-type" element={<DeliveryType />}/>
                         <Route path="/delivery-info" element={<DeliveryInfo />}/>
+                        <Route path="/delivery-pay" element={<DeliveryPay setQuantityState={setQuantityState} />}/>
                     </Routes>
                 </div>
             </div>

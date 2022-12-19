@@ -219,7 +219,23 @@ export const orderAPI = {
     },
 
     deleteCostOfDelivery: async () => {
-        return await instance.put('order/delete-delivery-method', {
+        return await instance.put('order/delete-delivery-method', {},{
+            headers: {
+                token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
+            }
+        })
+    },
+
+    setUserInfoDelivery: async (userInfo, email) => {
+        return await instance.put('order/delivery-user-info', {userInfo, email}, {
+            headers: {
+                token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
+            }
+        })
+    },
+
+    setPerformedOrderStatus: async () => {
+        return await instance.put('order/delivery-buy', {}, {
             headers: {
                 token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
             }

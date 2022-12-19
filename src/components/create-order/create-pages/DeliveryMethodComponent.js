@@ -1,16 +1,22 @@
-import React, {useState} from 'react';
-import CreateTitle from "../create-title/CreateTitle";
-import {orderAPI} from "../../../api/api";
-import {NavLink} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {cartAPI, orderAPI} from "../../../api/api";
+import {NavLink, useNavigate} from "react-router-dom";
 
 
 const DeliveryMethodComponent = () => {
+    const navigate = useNavigate()
 
+    useEffect(() => {
+        const getCartQuantity = async () => {
+            const count = await cartAPI.getCartQuantity()
+
+            if (count === 0) navigate("/cart");
+        }
+        getCartQuantity()
+    }, [])
 
     const setNextPage = async (delivery) => {
-
         const letter = localStorage.getItem("letter") ? localStorage.getItem("letter") : ""
-
         // Создает в бд запись с товарами из корзины и тд
         await orderAPI.createOrder(delivery, letter)
     }
