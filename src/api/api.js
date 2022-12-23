@@ -240,6 +240,14 @@ export const orderAPI = {
                 token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
             }
         })
+    },
+
+    getOrders: async () => {
+        return await instance.get('order/get-orders', {
+            headers: {
+                token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
+            }
+        })
     }
 }
 

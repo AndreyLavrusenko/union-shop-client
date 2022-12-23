@@ -15,6 +15,7 @@ import DeliveryMethod from "./pages/delivery/delivery-method/DeliveryMethod";
 import DeliveryType from "./pages/delivery/delivery-type/DeliveryType";
 import DeliveryInfo from "./pages/delivery/delivery-info/DeliveryInfo";
 import DeliveryPay from "./pages/delivery/delivery-pay/DeliveryPay";
+import Order from "./pages/order/Order";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
                         <Route path="/shop" element={<AllContainer/>}/>
                         <Route path="/product/:id" element={<CardContainer setQuantityState={setQuantityState} />}/>
                         <Route path="/cart" element={<CartContainer setQuantityState={setQuantityState} />}/>
+                        <Route path="/order" element={<Order />} />
                         <Route path="/delivery-method" element={<DeliveryMethod />}/>
                         <Route path="/delivery-type" element={<DeliveryType />}/>
                         <Route path="/delivery-info" element={<DeliveryInfo />}/>
