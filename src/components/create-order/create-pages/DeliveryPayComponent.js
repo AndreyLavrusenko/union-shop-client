@@ -15,10 +15,19 @@ const DeliveryPayComponent = ({setQuantityState}) => {
         getCartQuantity()
     }, [])
 
+
     const onBuy = async () => {
-        await orderAPI.setPerformedOrderStatus()
-        setQuantityState(0)
-        return navigate('/order')
+        const {data} = await orderAPI.getOrdersQuantity()
+
+        if (data) {
+            await orderAPI.setPerformedOrderStatus()
+            setQuantityState(0)
+            return navigate('/order')
+        }
+
+        return navigate('/cart')
+
+
     }
 
     return (

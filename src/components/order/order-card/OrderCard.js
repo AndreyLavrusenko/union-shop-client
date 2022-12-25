@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import SmallCard from "./small-card/SmallCard";
+import {NavLink} from "react-router-dom";
 
 
 const OrderCard = ({
@@ -41,7 +42,7 @@ const OrderCard = ({
 
 
     return (
-        <div className="order__card">
+        <NavLink className="order__card" to={`/order/${id}`}>
             <div className="order__number">Заказ {id}</div>
             <div className="order__status">{status}</div>
 
@@ -77,7 +78,7 @@ const OrderCard = ({
                     }
                 </>
             }
-        </div>
+        </NavLink>
     );
 };
 

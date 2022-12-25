@@ -1,12 +1,24 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import CreateTitle from "../create-title/CreateTitle";
 import {useForm} from "react-hook-form";
-import {cartAPI, orderAPI} from "../../../api/api";
+import {authAPI, cartAPI, orderAPI} from "../../../api/api";
 import {useNavigate} from 'react-router-dom'
 
 
 const DeliveryInfoComponent = () => {
     const navigate = useNavigate()
+    const {register, formState: {errors}, handleSubmit} = useForm()
+    const [userData, setUserData] = useState({
+        fullName: "",
+        city: "",
+        country: "",
+        address: "",
+        phone: "",
+        index: "",
+        region: "",
+        email: ""
+    })
+
 
     useEffect(() => {
         const getCartQuantity = async () => {
@@ -17,129 +29,142 @@ const DeliveryInfoComponent = () => {
         getCartQuantity()
     }, [])
 
-    const {
-        register,
-        formState: {errors},
-        handleSubmit
-    } = useForm()
 
-    const onSubmit = async (data) => {
-        // Записывает данные пользователя в бд
-        await orderAPI.setUserInfoDelivery(JSON.stringify(data), data.email)
+    // Проверяет совершал ли человек покупки и если да, то подставляет его данные в поля
+    useEffect(() => {
+        const getUserInfo = async () => {
+            const {data} = await authAPI.getUserInfo()
+
+
+            if (data[0].userInfo) {
+                const user = JSON.parse(data[0].userInfo)
+
+                setUserData({
+                    fullName: user.fullName,
+                    city: user.city,
+                    country: user.country,
+                    address: user.address,
+                    phone: user.phone,
+                    index: user.index,
+                    region: user.region,
+                    email: user.email
+                })
+            }
+
+        }
+        getUserInfo()
+    }, [])
+
+
+
+    const onSubmit = async (e, userData) => {
+        e.preventDefault()
+
+        // Записывает данные пользователя в бд после нажатия на кнопку
+        await orderAPI.setUserInfoDelivery(JSON.stringify(userData), userData.email)
         return navigate("/delivery-pay");
+    }
+
+    const onChange = e => {
+        setUserData({...userData, [e.target.name]: e.target.value})
     }
 
     return (
         <div>
             <CreateTitle subtitle={"Введите ваше имя и адрес:"} title={"Куда отправить ваш заказ?"}/>
             <div className="create__order">
-                <form onSubmit={handleSubmit(onSubmit)} className="order__form">
+                <form onSubmit={e => onSubmit(e, userData)} className="order__form">
                     <input
-                        {...register("fullName", {
-                            required: "Поле обязательно к заполнению"
-                        })}
+                        required
                         type="name"
+                        value={userData.fullName}
+                        onChange={onChange}
                         name="fullName"
                         placeholder="ФИО (укажите полностью фамилию и имя)"
                         className="order__form-big order__form-input"
                     />
-                    <div>{errors?.fullName &&
-                        <p className="order__form-error">{errors?.fullName?.message || "Ошибка"}</p>}</div>
                     <div style={{display: "flex"}}>
                         <div>
                             <input
-                                {...register("city", {
-                                    required: "Поле обязательно к заполнению"
-                                })}
+                                required
                                 type="text"
+                                value={userData.city}
+                                onChange={onChange}
                                 name="city"
                                 placeholder="Город"
                                 className="order__form-input order__form-middle"
                             />
-                            <span>{errors?.city &&
-                                <p className="order__form-error">{errors?.city?.message || "Ошибка"}</p>}</span>
                         </div>
                         <div>
                             <input
-                                {...register("country", {
-                                    required: "Поле обязательно к заполнению"
-                                })}
+                                required
                                 type="text"
                                 name="country"
+                                value={userData.country}
+                                onChange={onChange}
                                 placeholder="Страна"
                                 className="order__form-input order__form-small"
                             />
-                            <span>{errors?.country &&
-                                <p className="order__form-error">{errors?.country?.message || "Ошибка"}</p>}</span>
                         </div>
                     </div>
                     <input
-                        {...register("address", {
-                            required: "Поле обязательно к заполнению"
-                        })}
+                        required
                         type="text"
                         name="address"
+                        value={userData.address}
+                        onChange={onChange}
                         placeholder="Улица, дом, квартира (укажите своей адрес полностью)"
                         className="order__form-big order__form-input"
                     />
-                    <div>{errors?.address &&
-                        <p className="order__form-error">{errors?.address?.message || "Ошибка"}</p>}</div>
                     <div style={{display: "flex"}}>
                         <div>
                             <input
-                                {...register("phone", {
-                                    required: "Поле обязательно к заполнению"
-                                })}
-                                type="tel"
+                                required
+                                type="text"
                                 name="phone"
+                                onChange={onChange}
+                                value={userData.phone}
                                 placeholder="Телефон"
                                 className="order__form-input order__form-middle"
                             />
-                            <span>{errors?.phone &&
-                                <p className="order__form-error">{errors?.phone?.message || "Ошибка"}</p>}</span>
                         </div>
                         <div>
                             <input
-                                {...register("index", {
-                                    required: "Поле обязательно к заполнению"
-                                })}
+                                required
                                 type="number"
                                 name="index"
+                                value={userData.index}
+                                onChange={onChange}
                                 placeholder="Почтовый индекс"
                                 className="order__form-input order__form-small"
                             />
-                            <span>{errors?.index &&
-                                <p className="order__form-error">{errors?.index?.message || "Ошибка"}</p>}</span>
                         </div>
                     </div>
                     <input
-                        {...register("region", {
-                            required: "Поле обязательно к заполнению"
-                        })}
+                        required
                         type="text"
                         name="region"
+                        value={userData.region}
+                        onChange={onChange}
                         placeholder="Регион"
                         className="order__form-big order__form-input"
                     />
-                    <div>{errors?.region &&
-                        <p className="order__form-error">{errors?.region?.message || "Ошибка"}</p>}</div>
+
 
                     <span className="order__form-label">
                         Введите адрес своей электронной почты. <br/>
                         На этот адрес будут отправляться уведомления о статусе заказа.
                     </span>
                     <input
-                        {...register("email", {
-                            required: "Поле обязательно к заполнению"
-                        })}
                         type="email"
                         name="email"
+                        value={userData.email}
+                        onChange={onChange}
                         required={true}
                         placeholder="Ваш адрес электронной почты"
                         className="order__form-input order__form-special"
                     />
-                    <div>{errors?.region &&
-                        <p className="order__form-error">{errors?.region?.message || "Ошибка"}</p>}</div>
+                    <div/>
 
                     <span className="order__form-label">
                        Введите промокод

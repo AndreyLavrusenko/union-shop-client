@@ -101,6 +101,7 @@
 
   &__list-quantity {
     border-radius: 50%;
+    position: relative;
     background-color: $dark;
     color: white;
     width: 20px;
@@ -110,6 +111,11 @@
     align-items: center;
     font-size: 12px;
     margin-left: 10px;
+
+    div {
+      position: absolute;
+      top: 4px;
+    }
   }
 
   &__list-item {

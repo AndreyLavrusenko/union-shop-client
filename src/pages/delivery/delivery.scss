@@ -218,6 +218,12 @@
         font-weight: 300;
         font-size: 14px;
         line-height: 16px;
+
+        transition: .5s;
+
+        &:hover {
+            background: #0707e1;
+        }
     }
 }
 
@@ -330,6 +336,12 @@
 
         margin-top: 45px;
 
+        transition: .5s;
+
+        &:hover {
+            background: #0707e1;
+        }
+
     }
 }
 
@@ -349,16 +361,16 @@
     cursor: pointer;
 
     font-weight: 400;
-    font-size: 8px;
-    line-height: 9px;
+    font-size: 10px;
+    line-height: 14px;
 }
 
 /* создание в label псевдоэлемента before со следующими стилями */
 .custom-checkbox+label::before {
     content: '';
     display: inline-block;
-    width: 1em;
-    height: 1em;
+    width: 1.4em;
+    height: 1.4em;
     flex-shrink: 0;
     flex-grow: 0;
     border: 1px solid #adb5bd;

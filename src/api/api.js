@@ -78,6 +78,14 @@ export const authAPI = {
         } catch (err) {
             dispatch(logoutFailure())
         }
+    },
+
+    getUserInfo: async () => {
+        return await instance.get('auth/userInfo', {
+            headers: {
+                token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
+            }
+        })
     }
 }
 
@@ -148,7 +156,6 @@ export const cartAPI = {
     setProduct: async (product, dispatch) => {
         dispatch(cartStart())
         try {
-            console.log(product)
             const res = await instance.post('cart', product, {
                 headers: {
                     token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
@@ -244,6 +251,22 @@ export const orderAPI = {
 
     getOrders: async () => {
         return await instance.get('order/get-orders', {
+            headers: {
+                token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
+            }
+        })
+    },
+
+    getOrdersQuantity: async () => {
+        return await instance.get('order/get-quantity-orders', {
+            headers: {
+                token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
+            }
+        })
+    },
+
+    getOrderById: async (id) => {
+        return await instance.get(`order/get-order/${id}`, {
             headers: {
                 token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
             }

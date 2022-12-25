@@ -11,7 +11,7 @@ const NavItems = ({quantityState, pathway, name, closeNavbar, children}) => {
                      title={name} end>
                 {children}
                 <span className="nav__list-link-text">{name === "Корзина"
-                    ? <div style={{display: "flex"}}>{name} <span className="nav__list-quantity">{quantityState}</span></div>
+                    ? <div style={{display: "flex"}}>{name} <span className="nav__list-quantity"><div>{quantityState}</div></span></div>
                     : name}
                 </span>
             </NavLink>
