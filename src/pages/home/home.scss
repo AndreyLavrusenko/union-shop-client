@@ -18,3 +18,22 @@
     margin-left: 70px;
   }
 }
+
+@media (max-width: 800px) {
+  .advertising__right {
+    width: 300px;
+  }
+
+  .advertising {
+    height: 100%;
+  }
+
+  .advertising__wrapper {
+    flex-direction: column;
+
+    padding: 30px 0;
+
+    height: 560px;
+  }
+
+}

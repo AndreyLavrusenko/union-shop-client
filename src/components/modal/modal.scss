@@ -231,6 +231,36 @@
     display: flex;
     justify-content: space-between;
   }
+}
+
+@media (max-width: 500px) {
+  .modal__info-or::after, .modal__info-or::before{
+    content: none;
+  }
+}
 
 
+@media (max-width: 465px) {
+  .modal__content {
+    height: 590px;
+  }
+}
+
+@media (max-width: 430px) {
+  .modal__info-desc {
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .modal__info {
+    margin-top: 0;
+  }
+
+  .modal__content {
+  }
+
+  .modal__login-item img{
+    width: 60px;
+    height: 55px;
+  }
 }

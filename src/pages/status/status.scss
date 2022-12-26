@@ -166,3 +166,94 @@
         }
     }
 }
+
+@media (max-width: 900px) {
+    .status {
+        padding-top: 40px;
+        padding-left: 0;
+    }
+
+    .status__wrapper {
+        flex-direction: column;
+    }
+
+    .status__info {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+    .status__info-title {
+        font-size: 25px;
+        line-height: 27px;
+    }
+
+    .status__info-subtitle {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .status__product {
+        width: 100%;
+    }
+}
+
+@media (max-width: 780px) {
+    .status__details {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .status__details-info {
+        margin-bottom: 40px;
+    }
+
+    .status__details-name {
+        font-size: 26px;
+        line-height: 28px;
+    }
+
+    .status__details-info p {
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .status__details-info .status__pay-info {
+        font-size: 16px;
+        line-height: 18px;
+    }
+}
+
+
+@media (max-width: 520px) {
+    .status__product .status__card {
+        flex-direction: column;
+    }
+
+    .status__card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            margin-bottom: 20px;
+        }
+    }
+
+    .status__product .status__card img {
+        width: 150px;
+        max-height: 160px
+    }
+
+    .status__product .status__card-name {
+        font-size: 25px;
+        line-height: 26px;
+    }
+
+    .status__product .status__card-list {
+        font-size: 19px;
+        line-height: 25px;
+    }
+}
