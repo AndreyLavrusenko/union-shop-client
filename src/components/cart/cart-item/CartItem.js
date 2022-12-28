@@ -1,11 +1,7 @@
 import {Link} from "react-router-dom";
 
 
-const CartItem = ({cart, color, handleDelete, product}) => {
-
-    // if (cart.count === 0) {
-    //     changeAvailable(false)
-    // }
+const CartItem = ({cart, color, handleDelete, product, plusProductQuantity, minusProductQuantity}) => {
 
     return (
         <div className="cart__info" key={cart.id}>
@@ -43,7 +39,7 @@ const CartItem = ({cart, color, handleDelete, product}) => {
                     </div>
 
                     <div className="cart__info-count">
-                        {cart.quantity}
+                        <button onClick={() => minusProductQuantity(cart.id)}>&#8722;</button> {cart.quantity} <button onClick={() => plusProductQuantity(cart.id)}>&#43;</button>
                     </div>
 
                     <div className="cart__info-right">

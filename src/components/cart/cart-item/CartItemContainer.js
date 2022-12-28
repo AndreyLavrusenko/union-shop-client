@@ -6,7 +6,8 @@ import {cartAPI} from "../../../api/api";
 const CartItemContainer = ({
                                cart,
                                handleDelete,
-
+                               plusProductQuantity,
+                               minusProductQuantity,
                            }) => {
 
 
@@ -27,16 +28,18 @@ const CartItemContainer = ({
 
     }, [cart])
 
-    if (!loading) {
+    // if (!loading) {
         return (
             <CartItem
+                plusProductQuantity={plusProductQuantity}
+                minusProductQuantity={minusProductQuantity}
                 handleDelete={handleDelete}
                 product={product}
                 cart={cart}
                 color={color}
             />
         );
-    }
+    // }
 
 };
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {cartAPI} from "../../api/api";
+import {authAPI, cartAPI} from "../../api/api";
 import Cart from "./Cart";
 import {useSelector} from "react-redux";
 
@@ -44,13 +44,24 @@ const CartContainer = ({setQuantityState}) => {
     // При удалении элемента из корзина, смотрит остались ли там товары, которых нет в наличии
     // Если их нет, то разрешает покупку
     useEffect(() => {
+        const arr = []
+
         myCart.map(item => {
-            if (item.quantity > item.count) {
-                setAvailableBuy(false)
+            if (item.quantity <= item.count) {
+                arr.push(1)
+            } else {
+                arr.push(0)
             }
         })
 
-    }, [updateDelete])
+        if (arr.includes(0)) {
+            setAvailableBuy(false)
+        } else {
+            setAvailableBuy(true)
+        }
+
+
+    }, [updateDelete, cartUpdate])
 
 
     // Удаление элемента из корзины
@@ -62,9 +73,21 @@ const CartContainer = ({setQuantityState}) => {
         setAvailableBuy(true)
     }
 
+    const plusProductQuantity = async (id) => {
+        await cartAPI.plusQuantity(id)
+        // Ререндер корзины
+        setCartUpdate(!cartUpdate)
+    }
+
+    const minusProductQuantity = async (id) => {
+        await cartAPI.minusQuantity(id)
+        // Ререндер корзины
+        setCartUpdate(!cartUpdate)
+        // setAvailableBuy(true)
+    }
+
 
     if (loading) return;
-
 
     return (
         <Cart
@@ -72,6 +95,8 @@ const CartContainer = ({setQuantityState}) => {
             loading={loading}
             handleDelete={handleDelete}
             availableBuy={availableBuy}
+            plusProductQuantity={plusProductQuantity}
+            minusProductQuantity={minusProductQuantity}
         />
     );
 };

@@ -1,5 +1,5 @@
 import '../cart.scss'
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 const CartHeader = ({myCart, availableBuy}) => {
     const price = myCart.reduce((accumulator, object) => {
@@ -14,7 +14,7 @@ const CartHeader = ({myCart, availableBuy}) => {
                 ? <Link style={{ textDecoration: "none"}} to="/delivery-method">
                     <button className="cart__header-button">Оформить заказ</button>
                 </Link>
-                : <div style={{marginBottom: "40px"}}/>
+                : <button style={{ textDecoration: "none", backgroundColor: "#0707e1", cursor: "not-allowed"}} className="cart__header-button" >Доступны не все товары</button>
             }
 
             <div className="cart__header-line"/>

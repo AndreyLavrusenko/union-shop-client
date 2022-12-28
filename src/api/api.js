@@ -196,6 +196,22 @@ export const cartAPI = {
 
     deleteItemFromCart: async (id) => {
         await instance.delete(`cart/${id}`)
+    },
+
+    plusQuantity: async (id) => {
+        await instance.put(`cart/plus-quantity/${id}`, {}, {
+            headers: {
+                token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
+            }
+        })
+    },
+
+    minusQuantity: async (id) => {
+        await instance.put(`cart/minus-quantity/${id}`, {}, {
+            headers: {
+                token: `Bearer ${JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser}`
+            }
+        })
     }
 }
 
