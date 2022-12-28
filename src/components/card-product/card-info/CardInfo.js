@@ -7,12 +7,16 @@ import {cartAPI} from "../../../api/api";
 import Modal from "../../modal/Modal";
 import 'animate.css';
 import {useNavigate} from "react-router-dom";
+import Notification from "../../notification/Notification";
 
 
 const CardInfo = ({productData, productInfo, isAuth, setRerenderCart, rerenderCart}) => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const {isLoading, error} = useSelector(state => state.cart)
+
+    // Отвечает за всплывающее уведомление
+    const [toastActive, setToastActive] = useState(false)
 
     const sizeImg = productData.sizeImg.split(',')
 
@@ -33,7 +37,6 @@ const CardInfo = ({productData, productInfo, isAuth, setRerenderCart, rerenderCa
 
     let price = null
     let title_product = ''
-
 
     useEffect(() => {
         // ОБнуляем выбранный цвет
@@ -166,6 +169,7 @@ const CardInfo = ({productData, productInfo, isAuth, setRerenderCart, rerenderCa
             setColorError(false)
         }
 
+        setToastActive(true)
         setRerenderCart(!rerenderCart)
     }
 
@@ -191,9 +195,9 @@ const CardInfo = ({productData, productInfo, isAuth, setRerenderCart, rerenderCa
     }
 
 
-
     return (
         <div className="cardinfo">
+            <Notification color={"#E2F5EA"} sendColor={"#6FCF97"} text={"Товар добавлен в корзину"} toastActive={toastActive} setToastActive={setToastActive} isError={error} />
             <div className="cardinfo__new">{productData.isNew ? "Новинка" : null}</div>
             <div className="cardinfo__title">{productData.title}</div>
             <div className="cardinfo__desc">{productData.description} -</div>
@@ -276,8 +280,9 @@ const CardInfo = ({productData, productInfo, isAuth, setRerenderCart, rerenderCa
             <button
                 className="cardinfo__button cardinfo__buy"
                 onClick={() => {
-                    addToCart()
-                    if (isAuth) navigate('/cart')
+                    addToCart().then(() => {
+                        if (isAuth) navigate('/cart')
+                    })
                 }}
             >Купить
             </button>
@@ -286,8 +291,8 @@ const CardInfo = ({productData, productInfo, isAuth, setRerenderCart, rerenderCa
                 disabled={isLoading}
                 className="cardinfo__button cardinfo__cart">{isLoading ? "Добавление..." : "В корзину"}
             </button>
-            <div className="cardinfo__button-error" style={error ? {display: "block"} : {display: "none"}}>Произошла
-                ошибка
+            <div className="cardinfo__button-error" style={error ? {display: "block"} : {display: "none"}}>
+                Произошла ошибка
             </div>
 
             <CardToggle title="О товаре" data={productData.about}/>

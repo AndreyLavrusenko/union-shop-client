@@ -24,8 +24,10 @@ const CartItem = ({cart, color, handleDelete, product}) => {
                                 className="cart__left-title">{product.title}</Link>
                             }
 
-                            <div className="cart__left-desc">{product.description} -</div>
-                            <div className="cart__left-desc">{cart.productName}</div>
+                           <div className="cart__left-desc-container">
+                               <div className="cart__left-desc">{product.description} -</div>
+                               <div className="cart__left-desc cart__left-desc-second">{cart.productName}</div>
+                           </div>
                             <div className="cart__left-option">
                                 {color === ""
                                     ? null
