@@ -8,7 +8,7 @@ const CartHeader = ({myCart, availableBuy}) => {
 
     return (
         <div className="cart__header">
-            <h1 className="cart__header-title">Общая сумма корзины {price} ₽.</h1>
+            <h1 className="cart__header-title">Общая сумма корзины <span>{price} ₽.</span></h1>
             <div className='cart__header-desc'>Бесплатная доставка</div>
             {availableBuy
                 ? <Link style={{ textDecoration: "none"}} to="/delivery-method">

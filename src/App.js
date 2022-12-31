@@ -1,22 +1,22 @@
 import {Routes, Route} from "react-router-dom";
+import {useState} from "react";
+
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
-import Cart from "./pages/cart/Cart";
-
-import './style/global.scss'
-import './style/normalize.scss'
 import NavbarContainer from "./components/navbar/NavbarContainer";
 import HomeContainer from "./pages/home/HomeContainer";
 import AllContainer from "./pages/all/AllContainer";
 import CardContainer from "./pages/card/CardContainer";
 import CartContainer from "./pages/cart/CartContainer";
-import {useState} from "react";
 import DeliveryMethod from "./pages/delivery/delivery-method/DeliveryMethod";
 import DeliveryType from "./pages/delivery/delivery-type/DeliveryType";
 import DeliveryInfo from "./pages/delivery/delivery-info/DeliveryInfo";
 import DeliveryPay from "./pages/delivery/delivery-pay/DeliveryPay";
 import Order from "./pages/order/Order";
 import Status from "./pages/status/Status";
+
+import './style/global.scss'
+import './style/normalize.scss'
 
 
 function App() {

@@ -51,7 +51,7 @@
   }
 }
 
-@media (max-width: 690px) {
+@media (max-width: 790px) {
   .card {
     flex-direction: column;
     align-items: center;
@@ -60,6 +60,10 @@
   .cardslider__main {
     width: 410px;
     height: 460px;
+  }
+
+  .cardinfo {
+    width: 410px;
   }
 
   .cardslider {
@@ -129,6 +133,12 @@
   .cardinfo__desc, .cardinfo__desc-title {
     font-size: 24px;
     line-height: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardinfo {
+    width: 90%;
   }
 }
 
