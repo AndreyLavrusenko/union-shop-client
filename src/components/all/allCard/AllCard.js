@@ -21,6 +21,7 @@ const AllCard = ({products, search}) => {
                         image={item.image}
                         isLogo={item.isLogo}
                         color={item.color}
+                        subColor={item.subColor}
                         backgroundcolor={item.backgroundcolor}
                     />
                 })}
@@ -40,6 +41,7 @@ const AllCard = ({products, search}) => {
                         image={item.image}
                         isLogo={item.isLogo}
                         color={item.color}
+                        subColor={item.subColor}
                         backgroundcolor={item.backgroundcolor}
                     />
                 })}

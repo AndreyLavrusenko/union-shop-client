@@ -14,6 +14,7 @@ const CardItem = forwardRef(({backgroundcolor, color, subColor, image, subtitle,
         }
     }, [])
 
+
     return (
         <NavLink ref={ref} to={`/product/${id}`} key={id} className={isShop ? "stripe__card stripe__card-hover" : "stripe__card"} style={{backgroundColor: backgroundcolor, color: color}}>
             <div className="stripe__card__header">
@@ -72,7 +73,7 @@ const CardItem = forwardRef(({backgroundcolor, color, subColor, image, subtitle,
                     : null}
             </div>
             <div className="stripe__card__content">
-                <img src={image} alt={title}/>
+                <img src={process.env.REACT_APP_BACK_URI + image} alt={title}/>
             </div>
         </NavLink>
     )

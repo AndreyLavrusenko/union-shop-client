@@ -18,7 +18,12 @@ const CardInfo = ({productData, productInfo, isAuth, setRerenderCart, rerenderCa
     // Отвечает за всплывающее уведомление
     const [toastActive, setToastActive] = useState(false)
 
-    const sizeImg = productData.sizeImg.split(',')
+    // Картинки с размерами товара
+    let sizeImg = []
+    if (productData.sizeImg.length > 1) {
+        sizeImg = JSON.parse(productData.sizeImg)
+    }
+
 
     // Изначальный размер
     const [activeSize, setActiveSize] = useState(productInfo[0].size)
@@ -305,7 +310,7 @@ const CardInfo = ({productData, productInfo, isAuth, setRerenderCart, rerenderCa
             <div className="cardinfo__size">
                 {sizeImg.map((item, i) => (
                     <div key={i}>
-                        <img src={item} alt="" className="cardinfo__size-img"/><br/>
+                        <img src={process.env.REACT_APP_BACK_URI + item} alt="" className="cardinfo__size-img"/><br/>
                     </div>
                 ))}
             </div>
